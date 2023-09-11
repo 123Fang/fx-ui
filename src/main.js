@@ -1,5 +1,7 @@
 import { createApp } from 'vue'
-import './style.css'
 import App from './App.vue'
+import fxUI from '../packages/button/index'
 
-createApp(App).mount('#app')
+const app = createApp(App)
+app.use(fxUI)
+app.mount('#app')
