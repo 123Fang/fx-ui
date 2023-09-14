@@ -63,7 +63,7 @@ const checkChange = (item,index) =>{
   }
   checkOptions.value.forEach((item,index)=>{
     if(item.checked){
-      checkData.push(item.label)
+      checkData.push(item[props.valueFiled])
     }
   })
   emit('update:modelValue',checkData)
