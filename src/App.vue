@@ -132,45 +132,104 @@
 
   <h4>基本使用</h4>
   <span style="width:100%;margin-right:0;">
-    <fx-table :options="options">
+    <fx-table :options="options" :headStyle="headStyle" size="default">
+      <template #head-job="item">
+				<fx-dropdown :title="item.scope.title" :options="dorpoptions1" @change="dropchange1" trigger="hover" size="mini"></fx-dropdown>
+      </template>
       <template #id="item">
         <div>{{item.scope.row.id}}</div>
       </template>
-      <template #action>
-        <fx-button type="text" leftIcon="fx-icon-edit" size="small">编辑</fx-button>
+      <template #action="item">
+        <fx-button type="text" leftIcon="fx-icon-edit" size="small" :disabled="item.scope.rowIndex%2==0">编辑</fx-button>
         <fx-button type="text" leftIcon="fx-icon-ashbin" style="color:#ec3437"  size="small">删除</fx-button>
       </template>
     </fx-table>
   </span>
 	
-	<h4>基本使用</h4>
+	<h4>基本使用-不同大小</h4>
 	<span style="width:300px;margin-right:0;">
-		<fx-select v-model="selVal" placeholder="请选择"></fx-select>
+		<fx-select 
+			v-model="selVal" 
+			placeholder="请选择" 
+			:options="selOptions" 
+			@change="selchange"
+		>
+		</fx-select>
 	</span>
+	<span style="width:250px;margin-right:0;">
+		<fx-select v-model="selVal" placeholder="请选择" size="small" :options="selOptions" disabled></fx-select>
+	</span>
+	<span style="width:200px;margin-right:0;">
+		<fx-select v-model="selVal" placeholder="请选择" size="mini" :options="selOptions"></fx-select>
+	</span>
+	<h4>可搜索过滤</h4>
 	<span style="width:300px;margin-right:0;">
-		<fx-select v-model="selVal" placeholder="请选择" size="small"></fx-select>
+		<fx-select 
+			v-model="selVal1" 
+			placeholder="请选择" 
+			:options="selOptions1" 
+			@change="selchange1"
+			searchable
+		>
+		</fx-select>
 	</span>
+	<h4>多选</h4>
 	<span style="width:300px;margin-right:0;">
-		<fx-select v-model="selVal" placeholder="请选择" size="mini"></fx-select>
+		<fx-select 
+			v-model="selVal2" 
+			placeholder="请选择" 
+			:options="selOptions1" 
+			@change="selchange2"
+			multiple
+		>
+		</fx-select>
 	</span>
+  <p>
+    <fx-dropdown title="下拉菜单" :options="dorpoptions" @change="dropchange">
+			<template #Img>
+				<img src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" alt="">
+			</template>
+		</fx-dropdown>
+  </p>
+	<p>
+	  <fx-dropdown title="下拉菜单" :options="dorpoptions" @change="dropchange" size="small">
+			<template #Img>
+				<img src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" alt="">
+			</template>
+		</fx-dropdown>
+	</p>
+	<p>
+	  <fx-dropdown title="下拉菜单" :options="dorpoptions" @change="dropchange" size="mini" trigger="click">
+			<template #Img>
+				<img src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" alt="">
+			</template>
+		</fx-dropdown>
+	</p>
+  <h4>基本使用</h4>
+  <fx-radio v-model="radioVal" :options="radioOptions" @change="radioChange" :inline="false"></fx-radio>
 
-  <h4>基本使用1</h4>
-	<span style="width:300px;margin-right:0;">
-		<fx-dropdown
-    title="下拉菜单"
-    :options="dorpoptions"
-    @change="dropchange"
-  ></fx-dropdown>
-	</span>
-
-
+  <h4>基本使用</h4>
+  <!-- <fx-checkbox v-model="checkVal" :options="checkOptions" @change="checkChange" :inline="true"></fx-checkbox>
+  <fx-checkbox v-model="checkVal" :options="checkOptions" @change="checkChange" :inline="true" size="small"></fx-checkbox> -->
+  <fx-checkbox v-model="checkVal" :options="checkOptions" @change="checkChange" :inline="true" size="default" customColor="#09b63d" customClass="dsdsdsdsds"></fx-checkbox>
+  <p>1</p>
+  <p>1</p>
+  <p>1</p>
+  <p>1</p>
+  <p>1</p>
+  <p>1</p>
+  <p>1</p>
+  <p>1</p>
 </template>
 <script setup>
-import { reactive, ref } from "vue";
-
+import { onMounted, reactive, ref } from "vue";
 const value1 = ref('')
 const password = ref('')
-const selVal = ref('')
+const selVal = ref('aodaliya')
+const selVal1 = ref('')
+const selVal2 = ref([])
+const radioVal = ref('zhongguo')
+const checkVal = ref(['deguo'])
 const state = reactive({
   options:{
     fileds:[
@@ -186,7 +245,8 @@ const state = reactive({
       },
       {
         field:'job',
-        title:'职业'
+        title:'职业',
+				align:'center'
       },
       {
         field:'address',
@@ -209,11 +269,111 @@ const state = reactive({
       {id:2,name:'刘老四',job:'农民',address:'可能在中国',from:"想象出来的"},
       {id:11,name:'白骨精',job:'妖精',address:'西游记',from:"西游记神话故事"},
     ]
+  },
+  selOptions:[
+    {
+      label:'中国',
+      value:'zhongguo'
+    },
+    {
+      label:'俄罗斯',
+      value:'eluosi',
+			disabled:true
+    },
+    {
+      label:'美国',
+      value:'meiguo'
+    },
+    {
+      label:'澳大利亚',
+      value:'aodaliya',
+			disabled:true
+    },
+    {
+      label:'巴基斯坦',
+      value:'bajisitan'
+    }
+  ],
+	selOptions1:[
+		{
+			label:'HTML',
+			value:"HTML"
+		},
+		{
+			label:'Node',
+			value:"Node"
+		},
+		{
+			label:'CSS',
+			value:"CSS"
+		},
+		{
+			label:'javascript',
+			value:"java"
+		},
+		{
+			label:'mzl-ui',
+			value:"mzl-ui"
+		},
+		{
+			label:'mzl-vi',
+			value:"mzl-vi"
+		},
+		{
+			label:'Npm',
+			value:"Npm"
+		},
+		{
+			label:'HTML',
+			value:"HTML"
+		},
+		{
+			label:'java',
+			value:"java"
+		},
+		{
+			label:'XML',
+			value:"XML"
+		},
+		{
+			label:'mzl-li',
+			value:"mzl-li"
+		}
+	],
+	dorpoptions:[
+		{label:"下拉菜单",icon:'fx-icon-file'},
+		{label:"下拉菜单",icon:'fx-icon-keyboard-9'},
+		{label:"下拉菜单",icon:'fx-icon-link'},
+		{label:"下拉菜单",icon:'fx-icon-file'},
+		{label:"下拉菜单",icon:'fx-icon-file'},
+	],
+	dorpoptions1:[
+		{label:"放羊娃",icon:'fx-icon-file'},
+		{label:"徒弟",icon:'fx-icon-keyboard-9'},
+		{label:"农民",icon:'fx-icon-link'},
+		{label:"妖精",icon:'fx-icon-file'}
+	],
+  radioOptions:[
+    {'label':"中国","value":"zhongguo","disabled":true},
+    {'label':"英国","value":"yingguo"},
+    {'label':"德国","value":"deguo"},
+    {'label':"法国","value":"faguo"}
+  ],
+  checkOptions:[
+    {'label':"中国","value":"zhongguo","disabled":true},
+    {'label':"英国","value":"yingguo"},
+    {'label':"德国","value":"deguo"},
+    {'label':"法国","value":"faguo"}
+  ],
+  headStyle:{
+    // color:"#fff",
+    // borderColor:"#0162B0"
   }
 })
-const {options } = state
+
+const {options, selOptions, selOptions1,headStyle, dorpoptions, dorpoptions1, radioOptions,checkOptions } = state
 const focus = (e) =>{
-  // console.log(e);
+  console.log(e.target.value);
 }
 const blur = (e) =>{
   // console.log(e)
@@ -227,19 +387,30 @@ const change = (e) =>{
 const clear = () =>{
   console.log("清空")
 }
-
-// dropdown
-const dorpoptions = reactive([
-    { label: "菜单1" },
-    { label: "菜单2" },
-    { label: "菜单3" },
-    { label: "菜单4" },
-    { label: "菜单5" },
-  ],
-);
-const dropchange = (item, index) => {
-  console.log(item, index);
-};
+const selchange = (item,index) =>{
+	console.log(selVal.value);
+	// console.log(item,index);
+}
+const selchange1 = (item,index) =>{
+	// console.log(selVal1.value);
+	// console.log(item,index);
+}
+const dropchange = (item,index) =>{
+	console.log(item,index);
+}
+const dropchange1 = (item,index) =>{
+	console.log(item,index);
+}
+const selchange2 = (item,index) =>{
+	// console.log(selVal1.value);
+	console.log(item,index);
+}
+const radioChange = (e)=>{
+  console.log(e);
+}
+const checkChange = (e) =>{
+  console.log(checkVal.value);
+}
 </script>
 <style scoped>
 span{
@@ -247,6 +418,6 @@ span{
   display:inline-block
 }
 div{
-  margin-bottom:10px;
+  /* margin-bottom:10px; */
 }
 </style>
