@@ -153,14 +153,17 @@
 	<span style="width:300px;margin-right:0;">
 		<fx-select v-model="selVal" placeholder="请选择" size="mini"></fx-select>
 	</span>
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
+
+  <h4>基本使用1</h4>
+	<span style="width:300px;margin-right:0;">
+		<fx-dropdown
+    title="下拉菜单"
+    :options="dorpoptions"
+    @change="dropchange"
+  ></fx-dropdown>
+	</span>
+
+
 </template>
 <script setup>
 import { reactive, ref } from "vue";
@@ -224,6 +227,19 @@ const change = (e) =>{
 const clear = () =>{
   console.log("清空")
 }
+
+// dropdown
+const dorpoptions = reactive([
+    { label: "菜单1" },
+    { label: "菜单2" },
+    { label: "菜单3" },
+    { label: "菜单4" },
+    { label: "菜单5" },
+  ],
+);
+const dropchange = (item, index) => {
+  console.log(item, index);
+};
 </script>
 <style scoped>
 span{
