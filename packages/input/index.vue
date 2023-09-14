@@ -1,9 +1,11 @@
 <template>
-  <div class="fx-append-input" :style="{'min-width':'auto'}">
+  <div :class="[`fx-group-input-${size}`]" :style="{'min-width':'auto'}">
     <div :class="isClass" :style="isStyle" style="">
       <i :class="['left-icon','iconfont',leftIcon]" v-if="!showPassword&&leftIcon!=''"></i>
-      <input :type="inptype" @focus="focus" @blur="blur" :value="modelValue"  @input="iptChange" :disabled="disabled" @change="change" :placeholder="placeholder" :autofocus="autofocus"/>
-      <i class="clearable-icon iconfont fx-icon-close" v-if="!showPassword&&clearable&&modelValue!=''"  @click="clear"></i>
+      <input :type="inptype" @focus="focus" @blur="blur" :value="modelValue"  @input="iptChange" :disabled="disabled" @change="change" :placeholder="placeholder" :autofocus="autofocus" :readonly="readonly" :form="form"/>
+       <transition name="slide-fade">
+        <i class="clearable-icon iconfont m-icon-close" v-if="!showPassword&&clearable&&modelValue!=''" @click="clear"></i>
+      </transition>
       <i :class="['right-icon','iconfont',rightIcon]" v-if="!showPassword&&rightIcon!=''"></i>
       <i v-if="showPassword"  :class="['password-icon','iconfont fx-icon-browse']" @click="showPwd(type)"></i>
     </div>
@@ -11,7 +13,7 @@
   </div>
 </template>
 <script>
-import { reactive, ref,defineEmits,computed, useSlots} from 'vue'
+import { reactive, ref,computed, useSlots} from 'vue'
 export default {
   name:"fx-input"
 }
@@ -19,7 +21,7 @@ export default {
 <script setup>
 const emit = defineEmits(['update:modelValue','clear','focus','blur','input','change'])
 const props = defineProps({
-  modelValue:String,
+  modelValue:String|Number,
   disabled:Boolean,
   clearable:Boolean,
   showPassword:Boolean,
@@ -42,7 +44,9 @@ const props = defineProps({
   focusColor:{
     type:String,
     default:'#0e80eb'
-  }
+  },
+  readonly:Boolean,
+  form:String
 })
 const slot = useSlots()
 const isStyle = ref({})
@@ -80,7 +84,6 @@ const change = (e) =>{
   emit('change',e)
 }
 const clear = (e) =>{
-  props.modelValue = ''
   emit('update:modelValue', "")
   emit('clear')
 }
@@ -96,7 +99,7 @@ const showPwd = (e) =>{
 }
 const isClass = computed(()=>{
   return [
-    props.clearable?'fx-input-clearable': props.size=='default'?'fx-input-default':`fx-input-${props.size}`,
+    props.clearable?'fx-input-clearable':props.size=='default'?'fx-input-default':`fx-input-${props.size}`,
     props.leftIcon!=""?`fx-input-left-icon-${props.size}`:!props.clearable?props.rightIcon!=""?`fx-input-right-icon-${props.size}`:'':'',
     props.disabled?'fx-input-disabled':'',
     props.type=='password'?props.showPassword?`fx-input-password-showpassword-${props.size}`:`fx-input-password-${props.size}`:''
@@ -104,7 +107,7 @@ const isClass = computed(()=>{
 })
 </script>
 <style scoped lang="scss">
-.fx-input-default,.fx-input-password-default,.fx-input-password-showpassword-default{
+.fx-input-default,.fx-input-password-default,.fx-input-password-showpassword-default,.fx-group-input-default{
   width:100%;
   height:35px;
   border:1px solid #dcdfe6f6;
@@ -173,7 +176,7 @@ const isClass = computed(()=>{
     cursor: pointer;
   }
 }
-.fx-input-small,.fx-input-password-small,.fx-input-password-showpassword-small{
+.fx-input-small,.fx-input-password-small,.fx-input-password-showpassword-small,.fx-group-input-small{
   width:100%;
   height:30px;
   border:1px solid #dcdfe6f6;
@@ -210,7 +213,7 @@ const isClass = computed(()=>{
     padding-right:30px
   }
 }
-.fx-input-mini,.fx-input-password-mini,.fx-input-password-showpassword-mini{
+.fx-input-mini,.fx-input-password-mini,.fx-input-password-showpassword-mini,.fx-group-input-mini{
   width:100%;
   height:28px;
   border:1px solid #dcdfe6f6;
@@ -379,6 +382,47 @@ const isClass = computed(()=>{
     color:#c6c8cc;
   }
 }
+.fx-group-input-default{
+	border: none;
+	height: auto;
+}
+.fx-group-input-small{
+	border: none;
+	height: auto;
+	.fx-input-clearable{
+		height: 30px;
+		.clearable-icon{
+			top:7px;
+			font-size: 13px;
+		}
+	}
+}
+.fx-group-input-mini{
+	border: none;
+	.fx-input-clearable{
+		height: 28px;
+		.clearable-icon{
+			top:8px;
+			font-size: 12px;
+		}
+	}
+}
+.fx-group-input-default :deep(.fx-button){
+  padding:9px 20px !important;
+	border-radius: 0 2px 2px 0;
+}
+.fx-group-input-small :deep(.fx-button){
+  padding:6.6px 15px !important;
+	border-radius: 0 2px 2px 0;
+}
+.fx-group-input-mini :deep(.fx-button){
+	padding:7px 15px !important;
+  font-size: 12px;
+	border-radius: 0 2px 2px 0;
+	i{
+		font-size: 12px;
+	}
+}
 input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color:    #c6c8cc;
 }
@@ -395,5 +439,13 @@ input::-ms-input-placeholder { /* Microsoft Edge */
    color:    #c6c8cc;
 }
 
+.slide-fade-enter-active {
+  transition: all 0.1s ease-out;
+}
 
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
 </style>
