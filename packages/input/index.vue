@@ -4,7 +4,7 @@
       <i :class="['left-icon','iconfont',leftIcon]" v-if="!showPassword&&leftIcon!=''"></i>
       <input :type="inptype" @focus="focus" @blur="blur" :value="modelValue"  @input="iptChange" :disabled="disabled" @change="change" :placeholder="placeholder" :autofocus="autofocus" :readonly="readonly" :form="form"/>
        <transition name="slide-fade">
-        <i class="clearable-icon iconfont m-icon-close" v-if="!showPassword&&clearable&&modelValue!=''" @click="clear"></i>
+        <i class="clearable-icon iconfont fx-icon-close" v-if="!showPassword&&clearable&&modelValue!=''" @click="clear"></i>
       </transition>
       <i :class="['right-icon','iconfont',rightIcon]" v-if="!showPassword&&rightIcon!=''"></i>
       <i v-if="showPassword"  :class="['password-icon','iconfont fx-icon-browse']" @click="showPwd(type)"></i>
