@@ -1,7 +1,8 @@
 
 # fx-ui更新日志
 
-
+## v0.3.2
+##### update components & fix gen
 ## v0.3.1
 ##### fix gen 脚本bug 
 ## v0.3.0

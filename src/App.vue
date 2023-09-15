@@ -211,7 +211,41 @@
   <h4>基本使用</h4>
   <!-- <fx-checkbox v-model="checkVal" :options="checkOptions" @change="checkChange" :inline="true"></fx-checkbox>
   <fx-checkbox v-model="checkVal" :options="checkOptions" @change="checkChange" :inline="true" size="small"></fx-checkbox> -->
-  <fx-checkbox v-model="checkVal" :options="checkOptions" @change="checkChange" :inline="true" size="default" customColor="#09b63d" customClass="dsdsdsdsds"></fx-checkbox>
+  <fx-checkbox v-model="checkVal" :options="checkOptions" @change="checkChange" :inline="true" size="default" customColor="#09b63d"></fx-checkbox>
+  <h4>基本使用</h4>
+  <fx-modal v-model="modalShow" width="40%" top="15%" align="center">
+    <template #header>
+      <i class="fx-icon-discount"></i> 这是标题
+    </template>
+    <template #content>
+      这是内容
+    </template>
+    <template #footer>
+      <fx-button size="small" style="margin-right:15px" @click="modalShow = false">取消</fx-button>
+      <fx-button type="primary" size="small" @click="modalShow = false">确认</fx-button>
+    </template>
+  </fx-modal>
+  <h4>基本使用</h4>
+  <fx-drawer v-model="drawerShow" direction="bottom" @close="drawerClose" @confirm="confirmFn" @cancel="cancelFn">
+    <template #content>
+      <div>这是内容区域...</div>
+      <div>这是内容区域...</div>
+      <div>这是内容区域...</div>
+    </template>
+  </fx-drawer>
+  <div class="loadingTest" style="width:100%;height:400px">
+    <p>323232</p>
+    <p>323232</p>
+    <p>323232</p>
+    <p>323232</p>
+    <p>323232</p>
+    <p>323232</p>
+    <p>323232</p>
+    <p>323232</p>
+    <p>323232</p>
+  </div>
+  <h4>基本使用</h4>
+  <fx-switch v-model="switchVal" @change="switchChange" :showTipsText="false" activeColor="#09b63d"></fx-switch>
   <p>1</p>
   <p>1</p>
   <p>1</p>
@@ -224,6 +258,10 @@
 <script setup>
 import { onMounted, reactive, ref,getCurrentInstance} from "vue";
 import Message from '../packages/message/index'
+// import Confirm from '../packages/confirm/index'
+import Loading from '../packages/loading/index'
+const modalShow = ref(false)
+const drawerShow = ref(false)
 const value1 = ref('')
 const password = ref('')
 const selVal = ref('aodaliya')
@@ -231,6 +269,7 @@ const selVal1 = ref('')
 const selVal2 = ref([])
 const radioVal = ref('zhongguo')
 const checkVal = ref(['deguo'])
+const switchVal = ref(true)
 const state = reactive({
   options:{
     fileds:[
@@ -313,12 +352,12 @@ const state = reactive({
 			value:"java"
 		},
 		{
-			label:'fx-ui',
-			value:"fx-ui"
+			label:'mzl-ui',
+			value:"mzl-ui"
 		},
 		{
-			label:'fx-vi',
-			value:"fx-vi"
+			label:'mzl-vi',
+			value:"mzl-vi"
 		},
 		{
 			label:'Npm',
@@ -337,8 +376,8 @@ const state = reactive({
 			value:"XML"
 		},
 		{
-			label:'fx-li',
-			value:"fx-li"
+			label:'mzl-li',
+			value:"mzl-li"
 		}
 	],
 	dorpoptions:[
@@ -374,10 +413,46 @@ const state = reactive({
 
 const {options, selOptions, selOptions1,headStyle, dorpoptions, dorpoptions1, radioOptions,checkOptions } = state
 const openMsg = ()=>{
-  Message({
-    type: 'success',
-    text: '登录失败'
+  Loading.show({
+    text:'正在加载中...',
+    target:'.loadingTest',
+    icon:'fx-icon-loading1',
+    scrollLock:true,
+    textColor:'#fff',
+    bgColor:"rgba(0, 0, 0, 0.5)",
+    showIcon:true,
+    img:''
   })
+  setTimeout(()=>{
+    Loading.hide()
+  },5000)
+  // drawerShow.value = true
+  // Message({
+  //   type: 'success',
+  //   text: '登录失败',
+  // })
+  // Confirm({
+  //   title:"提示",
+  //   text: '您确认要删除这条数据吗？',
+  //   icon:"fx-icon-collection_fill",
+  //   confirmText:"好的",
+  //   confirmShow:true,
+  //   cancelShow:true,
+  //   closeShow:true
+  // }).then(() => {
+  //   console.log("确定");
+  // }).catch(() => {
+  //   console.log('取消')
+  // })
+}
+const drawerClose = () => {
+  console.log("关闭了");
+}
+const confirmFn = () =>{
+  console.log("点击了确定");
+}
+const cancelFn = () =>{
+  console.log("点击了取消");
 }
 const focus = (e) =>{
   console.log(e.target.value);
@@ -418,8 +493,12 @@ const radioChange = (e)=>{
 const checkChange = (e) =>{
   console.log(checkVal.value);
 }
+const switchChange = (e) => {
+  console.log(e);
+}
 const instance = getCurrentInstance()
 onMounted(()=>{
+  
   // instance.proxy.$message({ text: '登录失败', type: 'error' })
 })
 </script>
@@ -430,5 +509,9 @@ span{
 }
 div{
   /* margin-bottom:10px; */
+}
+.loadingTest{
+  width:100%;
+  height:400px
 }
 </style>

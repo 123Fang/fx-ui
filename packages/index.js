@@ -5,8 +5,15 @@ import fInput from './input/index';
 import fTable from './table/index';
 import fSelect from './select/index'
 import fDropdown from './dropDown/index'
+import fSwitch from './switch/index'
+import fModal from './modal/index'
+import fDrawer from './drawer/index'
+// 版本号
+import pkg from '../package.json'
 
-const components = [fButton,fInput,fTable,fSelect,fDropdown]
+
+
+const components = [fButton,fInput,fTable,fSelect,fDropdown,fSwitch, fModal,fDrawer]
 
 const install = function (Vue, opts = {
     }) {
@@ -21,7 +28,7 @@ const install = function (Vue, opts = {
   }
 }
 export default {
-  "version": "0.3.1",
+  "version": pkg.version,
   // 导出的对象必须具有 install，才能被 Vue.use() 方法安装
   install,
 	// 以下是具体的组件列表

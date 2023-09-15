@@ -52,7 +52,7 @@ const vueComponentContent = `
 </template>
 
 <script setup>
-import { defineOptions, ref } from 'vue'
+import { ref } from 'vue'
 
 defineOptions({
   name: 'fx-${NORMALIZED_NAME}',
