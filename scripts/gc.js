@@ -73,7 +73,7 @@ const INDEXJSName = NORMALIZED_NAME.slice(0,1).toUpperCase() + NORMALIZED_NAME.s
 const indexJsContent = `
 import f${INDEXJSName} from './index.vue'
 f${INDEXJSName}.install = function (Vue) {
-  Vue.component(f${INDEXJSName}.name, ${INDEXJSName})
+  Vue.component(f${INDEXJSName}.name, f${INDEXJSName})
 }
 export default f${INDEXJSName}
 `
