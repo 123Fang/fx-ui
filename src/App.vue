@@ -1,6 +1,6 @@
 <template>
   <h4>基本类型</h4>
-  <span><fx-button>默认按钮</fx-button></span>  
+  <span><fx-button @click="openMsg">默认按钮</fx-button></span>  
   <span><fx-button type="primary">主要按钮</fx-button></span> 
   <span><fx-button type="success">成功按钮</fx-button></span> 
   <span><fx-button type="danger">危险按钮</fx-button></span> 
@@ -222,7 +222,8 @@
   <p>1</p>
 </template>
 <script setup>
-import { onMounted, reactive, ref } from "vue";
+import { onMounted, reactive, ref,getCurrentInstance} from "vue";
+import Message from '../packages/message/index'
 const value1 = ref('')
 const password = ref('')
 const selVal = ref('aodaliya')
@@ -312,12 +313,12 @@ const state = reactive({
 			value:"java"
 		},
 		{
-			label:'mzl-ui',
-			value:"mzl-ui"
+			label:'fx-ui',
+			value:"fx-ui"
 		},
 		{
-			label:'mzl-vi',
-			value:"mzl-vi"
+			label:'fx-vi',
+			value:"fx-vi"
 		},
 		{
 			label:'Npm',
@@ -336,8 +337,8 @@ const state = reactive({
 			value:"XML"
 		},
 		{
-			label:'mzl-li',
-			value:"mzl-li"
+			label:'fx-li',
+			value:"fx-li"
 		}
 	],
 	dorpoptions:[
@@ -372,6 +373,12 @@ const state = reactive({
 })
 
 const {options, selOptions, selOptions1,headStyle, dorpoptions, dorpoptions1, radioOptions,checkOptions } = state
+const openMsg = ()=>{
+  Message({
+    type: 'success',
+    text: '登录失败'
+  })
+}
 const focus = (e) =>{
   console.log(e.target.value);
 }
@@ -411,6 +418,10 @@ const radioChange = (e)=>{
 const checkChange = (e) =>{
   console.log(checkVal.value);
 }
+const instance = getCurrentInstance()
+onMounted(()=>{
+  // instance.proxy.$message({ text: '登录失败', type: 'error' })
+})
 </script>
 <style scoped>
 span{
