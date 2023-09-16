@@ -1,6 +1,8 @@
 
 # fx-ui更新日志
 
+## v0.3.3
+##### 自动生成组件库entry文件
 ## v0.3.2
 ##### update components & fix gen
 ## v0.3.1

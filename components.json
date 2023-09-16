@@ -1,0 +1,15 @@
+{
+  "button": "packages/button/index.js",
+  "checkbox": "packages/checkbox/index.js",
+  "drawer": "packages/drawer/index.js",
+  "confirm": "packages/confirm/index.js",
+  "dropDown": "packages/dropDown/index.js",
+  "input": "packages/input/index.js",
+  "loading": "packages/loading/index.js",
+  "message": "packages/message/index.js",
+  "modal": "packages/modal/index.js",
+  "radio": "packages/radio/index.js",
+  "select": "packages/select/index.js",
+  "switch": "packages/switch/index.js",
+  "table": "packages/table/index.js"
+}
