@@ -72,9 +72,11 @@ fs.writeFileSync(path.join(DIRNAME, 'index.vue'), vueComponentContent);
 const INDEXJSName = NORMALIZED_NAME.slice(0,1).toUpperCase() + NORMALIZED_NAME.slice(1)
 const indexJsContent = `
 import f${INDEXJSName} from './index.vue'
-f${INDEXJSName}.install = function (Vue) {
-  Vue.component(f${INDEXJSName}.name, f${INDEXJSName})
-}
+
+f${INDEXJSName}.install = app => {
+  app.component(f${INDEXJSName}.name, f${INDEXJSName})
+} 
+
 export default f${INDEXJSName}
 `
 fs.writeFileSync(path.join(DIRNAME, 'index.js'), indexJsContent);

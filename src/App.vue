@@ -249,9 +249,18 @@
   <!-- 基本使用 -->
   <fx-tree></fx-tree>
   <h4>基本使用</h4>
-  <fx-optfile id="file1" @beforeChange="beforeChange" @change="fileChange" multiple  targetType="box" label="" drop size="" imgListShow :fileList="fileList"></fx-optfile>
-  <fx-optfile id="file2" label="选择文件"></fx-optfile>
-  <fx-optfile id="file3" label="选择文件" showFileList multiple></fx-optfile>
+  <fx-optfile @beforeChange="beforeChange" @change="fileChange" multiple targetType="box" label="" drop size="" imgListShow :fileList="fileList"></fx-optfile>
+  <fx-optfile label="选择文件"></fx-optfile>
+  <fx-optfile label="选择文件" showFileList multiple  targetType="box" drop></fx-optfile>
+  <h4>基本使用</h4>
+  <fx-textarea v-model="textareaVal" placeholder="请输入内容" @input="textareaInpt"></fx-textarea>
+  <h4>基本使用</h4>
+  <fx-row>
+    <fx-col :span="4">323232</fx-col>
+    <fx-col :span="4">54656565</fx-col>
+  </fx-row>
+  <h4>基本使用</h4>
+  <fx-pagination :total="400" :current="1" :pageSize="9" @change="pagintaionChange" size="small" :activeColors="activeColors"></fx-pagination>
   <p>1</p>
   <p>1</p>
   <p>1</p>
@@ -277,6 +286,7 @@ const radioVal = ref('zhongguo')
 const checkVal = ref(['deguo'])
 const switchVal = ref(true)
 const fileList = ref([{name:1},{name:2}])
+const textareaVal = ref("")
 const state = reactive({
   options:{
     fileds:[
@@ -415,10 +425,18 @@ const state = reactive({
   headStyle:{
     // color:"#fff",
     // borderColor:"#0162B0"
+  },
+  activeColors:{
+    "background":"#0e80eb",
+    "hoverBackground":"#0e80eb",
+    "borderColor":"#d9d9d9",
+    "hoverBorderColor":"#09b63d",
+    "color":"#f57b29",
+    "hoverColor":"#fff"
   }
 })
 
-const {options, selOptions, selOptions1,headStyle, dorpoptions, dorpoptions1, radioOptions,checkOptions } = state
+const {options, selOptions, selOptions1,headStyle, dorpoptions, dorpoptions1, radioOptions,checkOptions,activeColors } = state
 const openMsg = ()=>{
   Loading.show({
     text:'正在加载中...',
@@ -510,6 +528,12 @@ const fileChange = (files) =>{
   console.log('选择之后');
   console.log(files);
   // console.log(fileList.value);
+}
+const textareaInpt = (e)=>{
+  console.log(textareaVal.value);
+}
+const pagintaionChange = (e) => {
+  console.log(e);
 }
 const instance = getCurrentInstance()
 onMounted(()=>{

@@ -17,7 +17,7 @@ const props = defineProps({
   options:{
     type:Object,
     default:()=>{
-      return {}
+      return []
     }
   },
   icon:String,
