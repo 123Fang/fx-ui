@@ -260,10 +260,13 @@ onMounted(()=>{
 
   li{
     list-style: none;
+    cursor: pointer;
     font-size:14px;
     color:#505050;
     transition: all .2s ease;
+    line-height: 26px;
     overflow: hidden;
+    user-select: none;
     position: relative;
     
     .fx-tree-lable-box{

@@ -26,7 +26,7 @@
       </div>
     </div>
     <!-- <img :src="imgSrc" alt=""> -->
-    <div class="fx-optfile-filelist" v-if="FileList.length>0">
+    <div class="fx-optfile-filelist" v-if="FileList.length>0&&showFileList">
       <ul>
         <transition-group name="list">
           <li v-for="(item,index) in FileList" :key="index">
@@ -110,7 +110,7 @@ const deleteImg = (index) =>{
   emit('update:fileList',File)
 }
 onMounted(()=>{
-  if(props.drop){
+  if(props.drop&&props.targetType === 'box'){
     let dropArea = refDiv.value
     dropArea.addEventListener('drop',(e)=>{
       e.stopPropagation()
