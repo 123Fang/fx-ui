@@ -46,7 +46,7 @@ fs.mkdirSync(DIRNAME, { recursive: true });
 
 const vueComponentContent = `
 <template>
-  <div class='fx-${NORMALIZED_NAME}-default'>
+  <div class="fx-${NORMALIZED_NAME}-default">
     <slot />
   </div>
 </template>
@@ -62,7 +62,7 @@ const props = defineProps({})
 
 // init here
 </script>
-<style scoped lang='scss'>
+<style lang="scss" scoped>
 .fx-${NORMALIZED_NAME}-default {}
 </style>
 `

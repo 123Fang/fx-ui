@@ -148,7 +148,10 @@
 	
 	<h4>基本使用-不同大小</h4>
 	<span style="width:300px;margin-right:0;">
+    <!--  customClass="custom" -->
 		<fx-select 
+      width="224px"
+      height="20px"
 			v-model="selVal" 
 			placeholder="请选择" 
 			:options="selOptions" 
@@ -247,7 +250,6 @@
   <h4>基本使用</h4>
   <fx-switch v-model="switchVal" @change="switchChange" :showTipsText="false" activeColor="#09b63d"></fx-switch>
   <!-- 基本使用 -->
-  <fx-tree></fx-tree>
   <h4>基本使用</h4>
   <fx-optfile @beforeChange="beforeChange" @change="fileChange" multiple targetType="box" label="" drop size="" imgListShow :fileList="fileList"></fx-optfile>
   <fx-optfile label="选择文件"></fx-optfile>
@@ -261,6 +263,45 @@
   </fx-row>
   <h4>基本使用</h4>
   <fx-pagination :total="400" :current="1" :pageSize="9" @change="pagintaionChange" size="small" :activeColors="activeColors"></fx-pagination>
+  <fx-date v-model="dateVal" clearable @change="dateChange" @clear="Dateclear" @open="dateFoucs" @close="dateBlur" startDate="2022-01-01" endDate="2022-03-21" placeholder="请选择日期"></fx-date>
+  <fx-backtop></fx-backtop>
+  <fx-tree :options="treeOptions" @nodeClick="nodeClicks" :defaultOpenNodes="['0-2-1']" multiple  :defaultSelectNodes="['0-2-1-0']"></fx-tree>
+  <h4>折叠面板-基本使用</h4>
+  <fx-collapse>
+    <fx-collapse-item name="1">
+      <div>Consistent with real life: in line with the process and logic of real life, and comply with languages and habits that the users are used to;
+Consistent within interface: all elements should be consistent, such as: design style, icons and texts, position of elements, etc.</div>
+    </fx-collapse-item>
+    <fx-collapse-item name="2">
+      <div>Consistent with real life: in line with the process and logic of real life, and comply with languages and habits that the users are used to;
+Consistent within interface: all elements should be consistent, such as: design style, icons and texts, position of elements, etc.</div>
+    </fx-collapse-item>
+    <fx-collapse-item name="3">
+      <div>Consistent with real life: in line with the process and logic of real life, and comply with languages and habits that the users are used to;
+Consistent within interface: all elements should be consistent, such as: design style, icons and texts, position of elements, etc.</div>
+    </fx-collapse-item>
+    <fx-collapse-item name="4">
+      <div>Consistent with real life: in line with the process and logic of real life, and comply with languages and habits that the users are used to;
+Consistent within interface: all elements should be consistent, such as: design style, icons and texts, position of elements, etc.</div>
+    </fx-collapse-item>
+  </fx-collapse>
+  <h4>基本使用-菜单</h4>
+  <fx-menu :options="menuOptions"></fx-menu>
+  <p>1</p>
+  <p>1</p>
+  <p>1</p>
+  <p>1</p>
+  <p>1</p>
+  <p>1</p>
+  <p>1</p>
+  <p>1</p>
+  <p>1</p>
+  <p>1</p>
+  <p>1</p>
+  <p>1</p>
+  <p>1</p>
+  <p>1</p>
+  <p>1</p>
   <p>1</p>
   <p>1</p>
   <p>1</p>
@@ -273,7 +314,7 @@
 <script setup>
 import { onMounted, reactive, ref,getCurrentInstance} from "vue";
 import Message from '../packages/message/index'
-// import Confirm from '../packages/confirm/index'
+import Confirm from '../packages/confirm/index'
 import Loading from '../packages/loading/index'
 const modalShow = ref(false)
 const drawerShow = ref(false)
@@ -281,12 +322,13 @@ const value1 = ref('')
 const password = ref('')
 const selVal = ref('aodaliya')
 const selVal1 = ref('')
-const selVal2 = ref([])
+const selVal2 = ref(['HTML','Node'])
 const radioVal = ref('zhongguo')
 const checkVal = ref(['deguo'])
 const switchVal = ref(true)
 const fileList = ref([{name:1},{name:2}])
 const textareaVal = ref("")
+const dateVal = ref("")
 const state = reactive({
   options:{
     fileds:[
@@ -333,6 +375,10 @@ const state = reactive({
       value:'zhongguo'
     },
     {
+      label:'中华人民共和国',
+      value:'zhongguocn'
+    },
+    {
       label:'俄罗斯',
       value:'eluosi',
 			disabled:true
@@ -353,7 +399,7 @@ const state = reactive({
   ],
 	selOptions1:[
 		{
-			label:'HTML',
+			label:'HTML1',
 			value:"HTML"
 		},
 		{
@@ -433,42 +479,241 @@ const state = reactive({
     "hoverBorderColor":"#09b63d",
     "color":"#f57b29",
     "hoverColor":"#fff"
-  }
+  },
+  treeOptions:[
+    {
+      label:"一级",
+      value:"",
+      children:[
+        {
+          label:"一级1",
+          value:"",
+        },
+        {
+          label:"一级2",
+          value:"",
+        },
+        {
+          label:"一级3",
+          value:"",
+          children:[
+            {
+              label:"一级3-1",
+              value:"",
+            },
+            {
+              label:"一级3-2",
+              value:"",
+              children:[
+                {
+                  label:"一级3-2-1",
+                  value:"",
+                },
+                {
+                  label:"一级3-2-2",
+                  value:"",
+                },
+                {
+                  label:"一级3-2-3",
+                  value:"",
+                }
+              ]
+            },
+            {
+              label:"一级3-3",
+              value:"",
+            }
+          ]
+        }
+      ]
+    },
+    {
+      label:"二级",
+      value:"",
+      children:[
+        {
+          label:"二级1",
+          value:"",
+        },
+        {
+          label:"二级2",
+          value:"",
+        },
+        {
+          label:"二级3",
+          value:"",
+          children:[
+            {
+              label:"二级3-1",
+              value:"",
+              children:[
+                {
+                  label:"二级3-1-1",
+                  value:"",
+                },
+                {
+                  label:"二级3-1-2",
+                  value:"",
+                },
+                {
+                  label:"二级3-1-3",
+                  value:"",
+                }
+              ]
+            },
+            {
+              label:"二级3-2",
+              value:"",
+            },
+            {
+              label:"二级3-3",
+              value:"",
+            }
+          ]
+        }
+      ]
+    },
+    {
+      label:"三级",
+      value:"",
+      children:[
+        {
+          label:"三级1",
+          value:"",
+        },
+        {
+          label:"三级2",
+          value:"",
+        },
+        {
+          label:"三级3",
+          value:"",
+          children:[
+            {
+              label:"三级3-1",
+              value:"",
+            },
+            {
+              label:"三级3-2",
+              value:"",
+            },
+            {
+              label:"三级3-3",
+              value:"",
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  menuOptions:[
+    {
+      title:'菜单1'
+    },
+    {
+      title:'菜单2',
+      children:[
+        {
+          title:'菜单2-1'
+        },
+        {
+          title:'菜单2-2'
+        },
+        {
+          title:'菜单2-3',
+          children:[
+            {
+              title:'菜单2-3-1',
+              children:[
+                {
+                  title:'菜单2-3-1-1'
+                },
+                {
+                  title:'菜单2-3-1-2'
+                },
+              ]
+            },
+            {
+              title:'菜单2-3-2'
+            },
+          ]
+        },
+      ]
+    },
+    {
+      title:'菜单3',
+      children:[
+        {
+          title:'菜单3-1'
+        },
+        {
+          title:'菜单3-2'
+        }
+      ]
+    },
+    {
+      title:'菜单4',
+      children:[
+        {
+          title:'菜单4-1',
+          children:[
+            {
+              title:'菜单4-1-1'
+            },
+            {
+              title:'菜单4-1-2'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      title:'菜单5',
+      children:[
+        {
+          title:'菜单3-1'
+        }
+      ]
+    },
+    {
+      title:'菜单6'
+    }
+  ]  
 })
 
-const {options, selOptions, selOptions1,headStyle, dorpoptions, dorpoptions1, radioOptions,checkOptions,activeColors } = state
+const {options, selOptions, selOptions1,headStyle, dorpoptions, dorpoptions1, radioOptions,checkOptions,activeColors,treeOptions,menuOptions } = state
 const openMsg = ()=>{
-  Loading.show({
-    text:'正在加载中...',
-    target:'.loadingTest',
-    icon:'fx-icon-loading1',
-    scrollLock:true,
-    textColor:'#fff',
-    bgColor:"rgba(0, 0, 0, 0.5)",
-    showIcon:true,
-    img:''
-  })
-  setTimeout(()=>{
-    Loading.hide()
-  },5000)
+  // Loading.show({
+  //   text:'正在加载中...',
+  //   target:'.loadingTest',
+  //   icon:'fx-icon-loading1',
+  //   scrollLock:true,
+  //   textColor:'#fff',
+  //   bgColor:"rgba(0, 0, 0, 0.5)",
+  //   showIcon:true,
+  //   img:''
+  // })
+  // setTimeout(()=>{
+  //   Loading.hide()
+  // },5000)
   // drawerShow.value = true
   // Message({
   //   type: 'success',
   //   text: '登录失败',
   // })
-  // Confirm({
-  //   title:"提示",
-  //   text: '您确认要删除这条数据吗？',
-  //   icon:"fx-icon-collection_fill",
-  //   confirmText:"好的",
-  //   confirmShow:true,
-  //   cancelShow:true,
-  //   closeShow:true
-  // }).then(() => {
-  //   console.log("确定");
-  // }).catch(() => {
-  //   console.log('取消')
-  // })
+  Confirm({
+    title:"提示",
+    text: '您确认要删除这条数据吗？',
+    icon:"fx-icon-collection_fill",
+    confirmText:"好的",
+    confirmShow:true,
+    cancelShow:true,
+    closeShow:true
+  }).then(() => {
+    console.log("确定");
+  }).catch(() => {
+    console.log('取消')
+  })
 }
 const drawerClose = () => {
   console.log("关闭了");
@@ -494,13 +739,13 @@ const change = (e) =>{
 const clear = () =>{
   console.log("清空")
 }
-const selchange = (item,index) =>{
-	console.log(selVal.value);
+const selchange = (item) =>{
+	console.log(item);
 	// console.log(item,index);
 }
 const selchange1 = (item,index) =>{
-	// console.log(selVal1.value);
-	// console.log(item,index);
+	console.log(selVal1.value);
+	console.log(item,index);
 }
 const dropchange = (item,index) =>{
 	console.log(item,index);
@@ -508,9 +753,9 @@ const dropchange = (item,index) =>{
 const dropchange1 = (item,index) =>{
 	console.log(item,index);
 }
-const selchange2 = (item,index) =>{
+const selchange2 = (item) =>{
 	// console.log(selVal1.value);
-	console.log(item,index);
+	console.log(item);
 }
 const radioChange = (e)=>{
   console.log(e);
@@ -535,13 +780,29 @@ const textareaInpt = (e)=>{
 const pagintaionChange = (e) => {
   console.log(e);
 }
+const dateChange = (e) =>{
+  console.log(dateVal.value);
+  // console.log(e);
+}
+const Dateclear = () =>{
+  console.log('121212121');
+}
+const dateFoucs = (e) =>{
+  // console.log('开启');
+}
+const dateBlur = (e) => {
+  // console.log('关闭');
+}
+const nodeClicks = (item) => {
+  console.log(item);
+}
 const instance = getCurrentInstance()
-onMounted(()=>{
-  
-  // instance.proxy.$message({ text: '登录失败', type: 'error' })
-})
 </script>
 <style scoped>
+.custom{
+  width: 90px !important;
+  height: 32px !important;
+}
 span{
   margin:0 10px 10px 0;
   display:inline-block

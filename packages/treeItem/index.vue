@@ -19,7 +19,7 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 defineOptions({
-  name:'fx-treeItem'
+  name:'fx-tree-item'
 })
 const emit = defineEmits(['nodeClick','change','selectClick'])
 const props = defineProps({
