@@ -1,15 +1,17 @@
 {
   "button": "packages/button/index.js",
+  "confirm": "packages/confirm/index.js",
   "checkbox": "packages/checkbox/index.js",
   "drawer": "packages/drawer/index.js",
-  "confirm": "packages/confirm/index.js",
+  "loading": "packages/loading/index.js",
   "dropDown": "packages/dropDown/index.js",
   "input": "packages/input/index.js",
-  "loading": "packages/loading/index.js",
-  "message": "packages/message/index.js",
+  "optfile": "packages/optfile/index.js",
   "modal": "packages/modal/index.js",
-  "radio": "packages/radio/index.js",
   "select": "packages/select/index.js",
+  "message": "packages/message/index.js",
+  "tree": "packages/tree/index.js",
+  "table": "packages/table/index.js",
   "switch": "packages/switch/index.js",
-  "table": "packages/table/index.js"
+  "radio": "packages/radio/index.js"
 }

@@ -3,7 +3,7 @@
   src: url('iconfont.ttf?t=1644241367511') format('truetype');
 }
 
-.iconfont {
+[class*="fx-icon"]{
   font-family: "iconfont" !important;
   font-size: 14px;
   font-style: normal;

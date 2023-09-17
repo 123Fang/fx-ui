@@ -246,6 +246,12 @@
   </div>
   <h4>基本使用</h4>
   <fx-switch v-model="switchVal" @change="switchChange" :showTipsText="false" activeColor="#09b63d"></fx-switch>
+  <!-- 基本使用 -->
+  <fx-tree></fx-tree>
+  <h4>基本使用</h4>
+  <fx-optfile id="file1" @beforeChange="beforeChange" @change="fileChange" multiple  targetType="box" label="" drop size="" imgListShow :fileList="fileList"></fx-optfile>
+  <fx-optfile id="file2" label="选择文件"></fx-optfile>
+  <fx-optfile id="file3" label="选择文件" showFileList multiple></fx-optfile>
   <p>1</p>
   <p>1</p>
   <p>1</p>
@@ -270,6 +276,7 @@ const selVal2 = ref([])
 const radioVal = ref('zhongguo')
 const checkVal = ref(['deguo'])
 const switchVal = ref(true)
+const fileList = ref([{name:1},{name:2}])
 const state = reactive({
   options:{
     fileds:[
@@ -495,6 +502,14 @@ const checkChange = (e) =>{
 }
 const switchChange = (e) => {
   console.log(e);
+}
+const beforeChange =() =>{
+  console.log('选择之前');
+}
+const fileChange = (files) =>{
+  console.log('选择之后');
+  console.log(files);
+  // console.log(fileList.value);
 }
 const instance = getCurrentInstance()
 onMounted(()=>{
