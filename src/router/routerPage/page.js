@@ -12,17 +12,17 @@ export default [
       {
         path: '',
         name: '贡献指南',
-        // component: () => import('')
+        component: () => import('@/md/participation.md')
       },
       {
         path: 'updatelog',
         name: '更新日志',
-        // component: () => import('')
+        component: () => import('@/md/updatelog.md')
       },
       {
         path: 'install',
         name: '安装使用',
-        // component: () => import('')
+        component: () => import('@/md/install.md')
       },
       {
         path: 'button',
