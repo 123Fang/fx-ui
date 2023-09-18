@@ -1,6 +1,13 @@
 
 # fx-ui更新日志
 
+## v0.4.3/0.4.4/0.4.5/0.4.6
+##### 新增 badage backtop
+##### 每个组件新增doc目录，用于存放文档展示demo
+##### 改造文档项目
+##### 修改vite.conf.js文件，引入vite-plugin-vue-markdown插件
+
+
 ## v0.4.2
 ##### fix components bug
 ## v0.3.9/0.4.0/0.4.1

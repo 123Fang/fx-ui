@@ -1,5 +1,6 @@
-import Button from './index.vue'
-Button.install = function (Vue) {
-  Vue.component(Button.name, Button)
+import fButton from './index.vue'
+fButton.install = (app) => {
+  app.component(fButton.name, fButton)
 }
-export default Button
+//
+export default fButton

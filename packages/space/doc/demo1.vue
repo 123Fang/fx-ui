@@ -1,0 +1,21 @@
+<!-- html -->
+<template>
+  <fx-space>
+    <fx-button>按钮</fx-button>
+    <fx-button>按钮</fx-button>
+    <fx-button>按钮</fx-button>
+    <fx-button>按钮</fx-button>
+    <fx-button>按钮</fx-button>
+    <fx-button>按钮</fx-button>
+    <fx-button>按钮</fx-button>
+    <fx-button>按钮</fx-button>
+    <fx-button>按钮</fx-button>
+    <fx-button>按钮</fx-button>
+    <fx-button>按钮</fx-button>
+    <fx-button>按钮</fx-button>
+    <fx-button>按钮</fx-button>
+    <fx-button>按钮</fx-button>
+    <fx-button>按钮</fx-button>
+    <fx-button>按钮</fx-button>
+  </fx-space>
+</template>
