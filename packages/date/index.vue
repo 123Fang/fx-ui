@@ -1,5 +1,5 @@
 <template>
-  <div :class="['fx-date-box','fx-date-default']">
+  <div :class="['fx-date-box','fx-date-default']" v-click-outside>
     <div class="fx-date-inner-box">
       <fx-input v-model="dateVal" leftIcon="fx-icon-calendar" @clear="clear" :size="size" :clearable="clearable" readonly :placeholder="placeholders" :disabled="disabled" :focusColor="customActiveColor" :form="form"></fx-input>
       <transition name="slide-fade">
@@ -274,6 +274,56 @@ const clear = () =>{
   dateVal.value = ""
   emit('update:modelValue',dateVal.value)
   emit('clear')
+}
+const vClickOutside = {
+   beforeMount(el){
+    let handler = (e) =>{
+      if(!props.disabled){
+        if(props.type=='year'){
+          if(el.contains(e.target)&&e.target.className.indexOf("choosDateSpan")==-1&&e.target.className.indexOf('clearable-icon')==-1&&e.target.className.indexOf('mzl-chooseYear-span')==-1){
+            if(!show.value){
+              focus()
+            }
+          }else{
+            if(show.value){
+              blur()
+            }
+          }
+        }else if(props.type=='month'){
+          if(el.contains(e.target)&&e.target.className.indexOf("choosDateSpan")==-1&&e.target.className.indexOf('clearable-icon')==-1&&e.target.className.indexOf('mzl-chooseMonth-span')==-1){
+            if(!show.value){
+              focus()
+            }
+          }else{
+            if(show.value){
+              blur()
+            }
+          }
+        }else{
+          if(el.contains(e.target)&&e.target.className.indexOf("choosDateSpan")==-1&&e.target.className.indexOf('clearable-icon')==-1&&e.target.className.indexOf('mzl-today-span')==-1){
+            if(!show.value){
+              focus()
+            }
+          }else if(e.target.className.indexOf('date-span-disabled')==-1){
+            // console.log(e.target.className);
+            if(show.value){
+              blur()
+            }
+          }
+        }
+        
+      }
+    }
+    el.handler = handler;
+    if(typeof document !== 'undefined'){
+      document.addEventListener('click',handler)
+    }
+  },
+  unmounted(el){
+    if(typeof document !== 'undefined'){
+      document.removeEventListener('click',el.handler)
+    }
+  }
 }
 const selectDate = (item) => {
   if(item.time>=disStartDate.value&&item.time<=disEndDate.value){

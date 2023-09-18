@@ -77,15 +77,15 @@ const blur = (e)=>{
     color:#606266;
     font-family: auto;
     &:focus,&:active,&:focus-visible{
-      border:1px solid blue
+      border:1px solid #0e80eb
     }
     &:focus-visible{
-      border:1px solid blue
+      border:1px solid #0e80eb
     }
   }
   .max-length-box{
     font-size:14px;
-    color: gray;
+    color: #606266;
     position: absolute;
     bottom:10px;
     right:10px;

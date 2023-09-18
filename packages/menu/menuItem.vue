@@ -135,6 +135,19 @@ const IconRotate = (flag) => {
   meunIconRotate.value = flag;
 };
 props.items.key = props.dataKey;
+const getParents = (option, key) => {
+  for (var i in option) {
+    if (option[i].key == key) {
+      return [option[i]];
+    }
+    if (option[i].children) {
+      var ro = getParents(option[i].children, key);
+      if (ro !== undefined) {
+        return ro.concat(option[i]);
+      }
+    }
+  }
+};
 let timer = null;
 let timer1 = null;
 const toggler = (item) => {
@@ -173,6 +186,12 @@ const handelClick = (item) => {
   if (!item.disabled) {
     tabkey.value = item.key;
     setActive(props.option);
+    getParents(props.option, item.key).forEach((v, i) => {
+      v.isActive = true;
+    });
+    getParents(props.option, item.key)[
+      getParents(props.option, item.key).length - 1
+    ].isOpen = false;
     emit("change", item);
   }
 };

@@ -99,7 +99,7 @@ const nextChange = () =>{
       emit('update:current',currentPage.value)
       emit('change',currentPage.value)
       if(Math.ceil(props.total/props.pageSize)>props.maxSize){
-        if(currentPage.value>props.maxSize/2){
+        if(currentPage.value>props.maxSize/2&&Math.ceil(props.total/props.pageSize)-currentPage.value>=props.maxSize/2){
           marginLeft.value-=(props.size=='small'?32:36)
         }
       }
@@ -113,7 +113,7 @@ const change = (index) => {
     emit('update:current',currentPage.value)
     emit('change',currentPage.value)
     if(Math.ceil(props.total/props.pageSize)>props.maxSize){
-      if(currentPage.value>props.maxSize/2){
+      if(currentPage.value>props.maxSize/2&&Math.ceil(props.total/props.pageSize)-currentPage.value>=props.maxSize/2){
         marginLeft.value=(currentPage.value-props.maxSize/2)*-(props.size=='small'?32:36)
       }else if(currentPage.value<=props.maxSize/2){
         marginLeft.value = 0
@@ -131,7 +131,7 @@ const topage = (e) =>{
       emit('update:current',currentPage.value)
       emit('change',currentPage.value)
       if(Math.ceil(props.total/props.pageSize)>props.maxSize){
-        if(currentPage.value>props.maxSize/2){
+        if(currentPage.value>props.maxSize/2&&Math.ceil(props.total/props.pageSize)-currentPage.value>=props.maxSize/2){
           marginLeft.value=(currentPage.value-props.maxSize/2)*-(props.size=='small'?32:36)
         }else if(currentPage.value<=props.maxSize/2){
           marginLeft.value = 0
@@ -144,7 +144,7 @@ const topage = (e) =>{
       emit('update:current',currentPage.value)
       emit('change',currentPage.value)
       if(Math.ceil(props.total/props.pageSize)>props.maxSize){
-        if(currentPage.value>props.maxSize/2){
+        if(currentPage.value>props.maxSize/2&&Math.ceil(props.total/props.pageSize)-currentPage.value>=props.maxSize/2){
           marginLeft.value=(currentPage.value-props.maxSize/2)*-(props.size=='small'?32:36)
         }else if(currentPage.value<=props.maxSize/2){
           marginLeft.value = 0
