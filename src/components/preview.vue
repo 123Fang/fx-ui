@@ -34,7 +34,6 @@ const props = defineProps({
   },
 });
 
-console.log('+++++', props)
 
 const showCode = ref(false);
 const border = ref("1px solid rgba(0,0,0,.06)");
@@ -50,7 +49,6 @@ const sourceCode = ref("");
 async function getSourceCode() {
   const isDev = import.meta.env.MODE === "development";
   if (isDev) {
-    console.log('----', props.compName)
     sourceCode.value = (
       await import(
         /* @vite-ignore */ `/packages/${props.compName}/doc/${props.demoName}.vue?raw`

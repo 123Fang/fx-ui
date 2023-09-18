@@ -2,30 +2,30 @@
 
 import fBacktop from './backtop/index.js';
 import fBadge from './badge/index.js';
-import fButton from './button/index.js';
-import fCheckbox from './checkbox/index.js';
 import fCol from './col/index.js';
+import fCheckbox from './checkbox/index.js';
+import fButton from './button/index.js';
 import fCollapseItem from './collapseItem/index.js';
 import fCollapse from './collapse/index.js';
 import fConfirm from './confirm/index.js';
 import fDate from './date/index.js';
 import fDrawer from './drawer/index.js';
 import fDropDown from './dropDown/index.js';
+import fLoading from './loading/index.js';
 import fInput from './input/index.js';
 import fMenu from './menu/index.js';
-import fLoading from './loading/index.js';
 import fMessage from './message/index.js';
 import fModal from './modal/index.js';
 import fOptfile from './optfile/index.js';
+import fPagination from './pagination/index.js';
 import fRow from './row/index.js';
 import fRadio from './radio/index.js';
-import fPagination from './pagination/index.js';
 import fSelect from './select/index.js';
-import fSwitch from './switch/index.js';
-import fTable from './table/index.js';
-import fTree from './tree/index.js';
-import fTextarea from './textarea/index.js';
 import fSpace from './space/index.js';
+import fTable from './table/index.js';
+import fSwitch from './switch/index.js';
+import fTextarea from './textarea/index.js';
+import fTree from './tree/index.js';
 import fTreeItem from './treeItem/index.js';
 // 版本号
 import pkg from '../package.json'
@@ -34,9 +34,9 @@ import pkg from '../package.json'
 const components = [
     fBacktop,
   fBadge,
-  fButton,
-  fCheckbox,
   fCol,
+  fCheckbox,
+  fButton,
   fCollapseItem,
   fCollapse,
   fDate,
@@ -46,15 +46,15 @@ const components = [
   fMenu,
   fModal,
   fOptfile,
+  fPagination,
   fRow,
   fRadio,
-  fPagination,
   fSelect,
-  fSwitch,
-  fTable,
-  fTree,
-  fTextarea,
   fSpace,
+  fTable,
+  fSwitch,
+  fTextarea,
+  fTree,
   fTreeItem
 ];
 
@@ -76,30 +76,30 @@ export {
   install,
     fBacktop,
   fBadge,
-  fButton,
-  fCheckbox,
   fCol,
+  fCheckbox,
+  fButton,
   fCollapseItem,
   fCollapse,
   fConfirm,
   fDate,
   fDrawer,
   fDropDown,
+  fLoading,
   fInput,
   fMenu,
-  fLoading,
   fMessage,
   fModal,
   fOptfile,
+  fPagination,
   fRow,
   fRadio,
-  fPagination,
   fSelect,
-  fSwitch,
-  fTable,
-  fTree,
-  fTextarea,
   fSpace,
+  fTable,
+  fSwitch,
+  fTextarea,
+  fTree,
   fTreeItem
 }
 
