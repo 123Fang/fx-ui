@@ -44,6 +44,11 @@ export default [
         "title-cn": "Checkbox 多选框",
         "title-en": "Checkbox",
         "path": "/fx/checkbox"
+      },
+      {
+        "title-cn": "Input 输入框",
+        "title-en": "Input",
+        "path": "/fx/input"
       }
     ]
   },
@@ -60,6 +65,11 @@ export default [
         "title-cn": "Progress 进度条",
         "title-en": "Progress",
         "path": "/fx/progress"
+      },
+      {
+        "title-cn": "Date 日期选择",
+        "title-en": "Date",
+        "path": "/fx/date"
       }
     ]
   },

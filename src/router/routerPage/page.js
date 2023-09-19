@@ -45,6 +45,14 @@ export default [
        path: 'checkbox',
        name: 'Checkbox 多选框',
        component: () => import('/packages/checkbox/doc/doc.md')
+     },{
+       path: 'date',
+       name: 'Date 日期选择',
+       component: () => import('/packages/date/doc/doc.md')
+     },{
+       path: 'input',
+       name: 'Input 输入框',
+       component: () => import('/packages/input/doc/doc.md')
      }
     ]
   }
