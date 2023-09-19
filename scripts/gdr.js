@@ -28,9 +28,9 @@ function genMenuList() {
 genMenuList()
 const menuListTemplate = `export default ${JSON.stringify(menuList,null,2)}`
 console.log('=====', menuListTemplate)
-console.log(path.join(__dirname,'../src/const/menuList2.js'))
+console.log(path.join(__dirname,'../src/const/menuList.js'))
 
-fs.writeFileSync(path.join(__dirname,'../src/const/menuList2.js'), menuListTemplate)
+fs.writeFileSync(path.join(__dirname,'../src/const/menuList.js'), menuListTemplate)
 
 // process.exit(1);
 
@@ -98,5 +98,5 @@ const pageRouteContext = render(TEMPLATE, {
   routesPage: routeTemplateList.join(',')
 })
 console.log('pageRouteContext-------', pageRouteContext)
-fs.writeFileSync(path.join(__dirname,'../src/router/routerPage/page2.js'), pageRouteContext)
+fs.writeFileSync(path.join(__dirname,'../src/router/routerPage/page.js'), pageRouteContext)
 

@@ -38,9 +38,9 @@ export default [
        name: 'Layout 布局',
        component: () => import('/packages/layout/doc/doc.md')
      },{
-       path: 'test',
-       name: 'Test 测试',
-       component: () => import('/packages/test/doc/doc.md')
+       path: 'progress',
+       name: 'Progress 进度条',
+       component: () => import('/packages/progress/doc/doc.md')
      }
     ]
   }

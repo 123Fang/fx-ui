@@ -28,11 +28,6 @@ export default [
         "title-cn": "Layout 布局",
         "title-en": "Layout",
         "path": "/fx/layout"
-      },
-      {
-        "title-cn": "Test 测试",
-        "title-en": "Test",
-        "path": "/fx/test"
       }
     ]
   },
@@ -55,6 +50,11 @@ export default [
         "title-cn": "Badge 徽章",
         "title-en": "Badge",
         "path": "/fx/badge"
+      },
+      {
+        "title-cn": "Progress 进度条",
+        "title-en": "Progress",
+        "path": "/fx/progress"
       }
     ]
   },

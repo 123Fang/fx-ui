@@ -11,7 +11,7 @@ export function genComponent(name) {
           reject(false);
         } else {
           console.log(stdout)
-          resolve(info);
+          resolve(name);
         }
       }
     );
