@@ -1,9 +1,9 @@
 {
-  "checkbox": "packages/checkbox/index.js",
-  "button": "packages/button/index.js",
   "backtop": "packages/backtop/index.js",
   "badge": "packages/badge/index.js",
   "col": "packages/col/index.js",
+  "checkbox": "packages/checkbox/index.js",
+  "button": "packages/button/index.js",
   "collapse": "packages/collapse/index.js",
   "collapseItem": "packages/collapseItem/index.js",
   "confirm": "packages/confirm/index.js",
@@ -15,15 +15,16 @@
   "menu": "packages/menu/index.js",
   "message": "packages/message/index.js",
   "modal": "packages/modal/index.js",
-  "pagination": "packages/pagination/index.js",
   "optfile": "packages/optfile/index.js",
+  "pagination": "packages/pagination/index.js",
+  "progress": "packages/progress/index.js",
   "radio": "packages/radio/index.js",
   "row": "packages/row/index.js",
-  "select": "packages/select/index.js",
-  "space": "packages/space/index.js",
   "switch": "packages/switch/index.js",
   "table": "packages/table/index.js",
+  "space": "packages/space/index.js",
+  "select": "packages/select/index.js",
   "textarea": "packages/textarea/index.js",
-  "tree": "packages/tree/index.js",
-  "treeItem": "packages/treeItem/index.js"
+  "treeItem": "packages/treeItem/index.js",
+  "tree": "packages/tree/index.js"
 }
