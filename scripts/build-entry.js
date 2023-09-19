@@ -102,7 +102,7 @@ function buildEntry() {
       globalPropertyTemplate.push(
         render(GLOBAL_PROPERTIES__TEMPLATE, {
           name: componentName,
-          package: name,
+          package: name.slice(0,1).toUpperCase() + name.slice(1),
         })
       );
     }

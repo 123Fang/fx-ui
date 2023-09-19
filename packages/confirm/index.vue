@@ -22,7 +22,7 @@
   
   <script setup>
   import { ref, onMounted} from 'vue'
-  import fButton from '../button/index'
+  import fxButton from '../button/index'
   const props = defineProps({
     title: {
       type: String,

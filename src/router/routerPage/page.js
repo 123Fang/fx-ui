@@ -53,6 +53,26 @@ export default [
        path: 'input',
        name: 'Input 输入框',
        component: () => import('/packages/input/doc/doc.md')
+     },{
+       path: 'confirm',
+       name: 'Confirm 消息确认',
+       component: () => import('/packages/confirm/doc/doc.md')
+     },{
+       path: 'message',
+       name: 'Message 消息提示',
+       component: () => import('/packages/message/doc/doc.md')
+     },{
+       path: 'menu',
+       name: 'Menu 菜单',
+       component: () => import('/packages/menu/doc/doc.md')
+     },{
+       path: 'modal',
+       name: 'Modal 弹窗',
+       component: () => import('/packages/modal/doc/doc.md')
+     },{
+       path: 'optfile',
+       name: 'Optfile 文件选择',
+       component: () => import('/packages/optfile/doc/doc.md')
      }
     ]
   }

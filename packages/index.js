@@ -64,9 +64,9 @@ const install = (app) => {
   components.forEach((i) => {
     app.use(i)
   })
-    app.config.globalProperties.$confirm = fConfirm
-  app.config.globalProperties.$loading = fLoading
-  app.config.globalProperties.$message = fMessage
+    app.config.globalProperties.$Confirm = fConfirm
+  app.config.globalProperties.$Loading = fLoading
+  app.config.globalProperties.$Message = fMessage
 }
 
 const fxUi = {

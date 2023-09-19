@@ -49,6 +49,11 @@ export default [
         "title-cn": "Input 输入框",
         "title-en": "Input",
         "path": "/fx/input"
+      },
+      {
+        "title-cn": "Optfile 文件选择",
+        "title-en": "Optfile",
+        "path": "/fx/optfile"
       }
     ]
   },
@@ -70,13 +75,34 @@ export default [
         "title-cn": "Date 日期选择",
         "title-en": "Date",
         "path": "/fx/date"
+      },
+      {
+        "title-cn": "Menu 菜单",
+        "title-en": "Menu",
+        "path": "/fx/menu"
       }
     ]
   },
   {
     "title-cn": "交互",
     "title-en": "interactive",
-    "list": []
+    "list": [
+      {
+        "title-cn": "Confirm 消息确认",
+        "title-en": "Confirm",
+        "path": "/fx/confirm"
+      },
+      {
+        "title-cn": "Message 消息提示",
+        "title-en": "Message",
+        "path": "/fx/message"
+      },
+      {
+        "title-cn": "Modal 弹窗",
+        "title-en": "Modal",
+        "path": "/fx/modal"
+      }
+    ]
   },
   {
     "title-cn": "其他",
