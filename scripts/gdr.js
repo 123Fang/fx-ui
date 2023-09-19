@@ -7,10 +7,8 @@ import { fileURLToPath } from "node:url"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 const [, , name_En, name_Zh, category] = process.argv
 const name_En_Up = name_En.slice(0,1).toUpperCase() + name_En.slice(1)
-console.log('argv-----', process.argv)
 
 
 // 生成文档菜单文件
@@ -18,7 +16,6 @@ function genMenuList() {
   const menuItem = menuList.find((item) => {
     return item['title-cn'] === category
   })
-  console.log('--------', menuItem)
   menuItem.list.push({
     "title-cn": `${name_En_Up} ${name_Zh}`,
     "title-en": name_En_Up ,
@@ -27,12 +24,7 @@ function genMenuList() {
 }
 genMenuList()
 const menuListTemplate = `export default ${JSON.stringify(menuList,null,2)}`
-console.log('=====', menuListTemplate)
-console.log(path.join(__dirname,'../src/const/menuList.js'))
-
 fs.writeFileSync(path.join(__dirname,'../src/const/menuList.js'), menuListTemplate)
-
-// process.exit(1);
 
 
 
@@ -46,7 +38,6 @@ const componentRoute = {
   component: () => import(`/packages/${name_En}/doc/doc.md`)
 }
 children.push(componentRoute)
-
 const routeTemplateList = []
 const ROUTE_TEMPLATE = 
      `{
@@ -60,8 +51,6 @@ children.forEach((item) => {
     name: item.name
   })) 
 })
-console.log('routeTemplateList---', routeTemplateList)
-
 const TEMPLATE = `
 export default [
   {
@@ -97,6 +86,6 @@ export default [
 const pageRouteContext = render(TEMPLATE, {
   routesPage: routeTemplateList.join(',')
 })
-console.log('pageRouteContext-------', pageRouteContext)
-fs.writeFileSync(path.join(__dirname,'../src/router/routerPage/page.js'), pageRouteContext)
+fs.writeFileSync(path.join(__dirname, '../src/router/routerPage/page.js'), pageRouteContext)
+console.log('生成组件文档路由配置成功')
 

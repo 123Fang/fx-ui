@@ -2,7 +2,7 @@
   <div class="header-block-box">
     <div class="logoBox">
       <img src="../assets/logo.jpeg" alt="fx-ui" @click="toHome" />
-      <fx-badge type="primary" value="V 0.4.1">
+      <fx-badge type="primary" value="V 0.5.X">
         <a href="javascript:;" @click="toHome">Fx UI</a>
       </fx-badge>
     </div>
@@ -20,7 +20,7 @@ const { push, currentRoute } = useRouter();
 const toHome = () => push("/");
 const fullPath = ref(currentRoute.value.fullPath)
 const tabIndex = ref(
-  fullPath == "/mzlui"
+  fullPath == "/fx"
     ? 1
     : sessionStorage.getItem("tabIndex") || 0
 );

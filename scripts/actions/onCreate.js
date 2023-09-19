@@ -4,7 +4,7 @@ import {genComponent, genDocRoute, genLibEntry } from './jobs/index.js'
 
 
 // create type 支持项
-const CREATE_TYPES = ['component', 'lib-entry']
+const CREATE_TYPES = ['component', 'lib-entry','doc-route']
 // 文档分类
 const DOCS_CATEGORIES = ['常规','通用', '数据', '交互', '其他']
 
@@ -51,7 +51,7 @@ export async function onCreate(cmd = {}) {
           {
             name: 'name',
             type: 'input',
-            message: '（必填）请输入组件 name ，将用作目录及文件名：',
+            message: '（必填）请输入组件 name（英文名称） ，将用作目录及文件名：',
             validate: (value) => {
               if (value.trim() === '') {
                 return '组件 name 是必填项！'
@@ -96,6 +96,40 @@ export async function onCreate(cmd = {}) {
       case 'lib-entry':
         genLibEntry()
         break
+      case 'doc-route':
+        const routeInfo = await inquirer.prompt([
+          {
+            name: 'name',
+            type: 'input',
+            message: '（必填）请输入组件 name（英文名称） ，将用作文档路由路径：',
+            validate: (value) => {
+              if (value.trim() === '') {
+                return '组件 name 是必填项！'
+              }
+              return true
+            }
+          },
+          {
+            name: 'title',
+            type: 'input',
+            message: '（必填）请输入组件中文名称，将用作文档列表显示：',
+            validate: (value) => {
+              if (value.trim() === '') {
+                return '组件名称是必填项！'
+              }
+              return true
+            }
+          },
+          {
+            name: 'category',
+            type: 'list',
+            message: '（必填）请选择组件分类，将用作文档列表分类：',
+            choices: DOCS_CATEGORIES,
+            default: 0
+          }
+      ])
+      genDocRoute(routeInfo)
+      break
       default:
         break
     }
@@ -104,36 +138,3 @@ export async function onCreate(cmd = {}) {
     process.exit(1)
   }
 }
-
-// function createComponent(info) {
-//   // 输出收集到的组件信息
-//   console.log(info)
-
-//   childProcess.exec(`node ./scripts/gc.js testCompp`, async (err, stdout, stderr) => {
-//     if (err) {
-//       console.log(err)
-//       return
-//     }
-//     console.log('-------新建组件--------------')
-//     console.log(err, stdout, stderr)
-//     const info = await inquirer.prompt([
-//       {
-//         name: 'category',
-//         type: 'list',
-//         message: '是否需要在文档项目生成此组件的路由页面',
-//         choices: DOCS_ROUTER,
-//         default: 0
-//       }
-//     ])
-//     console.log('-----+++++++', info) // { category: '需要' }
-//   })
-
-// }
-
-// function createLibEntry() {
-//   console.log('create lib-entry file.')
-//   childProcess.exec(`node ./scripts/build-entry.js`, (err, stdout, stderr) => {
-//     console.log('-------生成入口文件--------------')
-//     console.log(err, stdout, stderr)
-//   })
-// }

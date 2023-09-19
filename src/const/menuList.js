@@ -39,6 +39,11 @@ export default [
         "title-cn": "Button 按钮",
         "title-en": "Buttons",
         "path": "/fx/button"
+      },
+      {
+        "title-cn": "Checkbox 多选框",
+        "title-en": "Checkbox",
+        "path": "/fx/checkbox"
       }
     ]
   },

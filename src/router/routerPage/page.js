@@ -41,6 +41,10 @@ export default [
        path: 'progress',
        name: 'Progress 进度条',
        component: () => import('/packages/progress/doc/doc.md')
+     },{
+       path: 'checkbox',
+       name: 'Checkbox 多选框',
+       component: () => import('/packages/checkbox/doc/doc.md')
      }
     ]
   }

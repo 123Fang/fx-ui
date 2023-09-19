@@ -1,0 +1,50 @@
+<!-- html -->
+<template>
+  <fx-space>
+    <fx-progress
+      :percent="20"
+      progressType="circle"
+      :circleSize="120"
+      isShowText
+      roundCorner
+    ></fx-progress>
+    <fx-progress
+      :percent="40"
+      bgColor="#505050"
+      progressType="circle"
+      :circleSize="120"
+      isShowText
+      roundCorner
+    ></fx-progress>
+    <fx-progress
+      :percent="60"
+      currentStatus="OTHER"
+      progressType="circle"
+      :circleSize="120"
+      isShowText
+      roundCorner
+    ></fx-progress>
+    <fx-progress
+      :percent="90"
+      currentStatus="FAIL"
+      progressType="circle"
+      :circleSize="120"
+      :circleHeight="10"
+      isShowText
+    ></fx-progress>
+    <fx-progress
+      :percent="100"
+      currentStatus="SUCCESS"
+      progressType="circle"
+      :circleSize="120"
+      :circleHeight="10"
+      isShowText
+    >
+    </fx-progress>
+  </fx-space>
+</template>
+<style scoped>
+.mzl-progress {
+  margin-bottom: 10px;
+}
+</style>
