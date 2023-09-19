@@ -1,3 +1,4 @@
+
 export default [
   {
     path: '/',
@@ -25,20 +26,22 @@ export default [
         component: () => import('@/md/install.md')
       },
       {
-        path: 'button',
-        name: 'Button 按钮',
-        component: () => import('/packages/button/doc/doc.md')
-      },
-      {
-        path: 'badge',
-        name: 'Badge 徽章',
-        component: () => import('/packages/badge/doc/doc.md')
-      },
-      {
-        path: 'layout',
-        name: 'Layout 布局',
-        component: () => import('/packages/layout/doc/doc.md')
-      },
+       path: 'button',
+       name: 'Button 按钮',
+       component: () => import('/packages/button/doc/doc.md')
+     },{
+       path: 'badge',
+       name: 'Badge 徽章',
+       component: () => import('/packages/badge/doc/doc.md')
+     },{
+       path: 'layout',
+       name: 'Layout 布局',
+       component: () => import('/packages/layout/doc/doc.md')
+     },{
+       path: 'progress',
+       name: 'Progress 进度条',
+       component: () => import('/packages/progress/doc/doc.md')
+     }
     ]
   }
 ]
