@@ -149,7 +149,7 @@ import Attributes from './Attributes.vue'
 import preview from '@/components/preview.vue'
 </script>
 
-# ${NAME} 组件
+# ${NAME.slice(0,1).toUpperCase() + NAME.slice(1)} 组件
 
 #### ${NAME}组件基本描述...
 

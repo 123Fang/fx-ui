@@ -1,13 +1,21 @@
 ## fx-ui 更新日志
 
 
+### 0.5.6
+
+- docs 更新
+- 生成组件md脚本修复
+- add icon demo
+
 ### 0.5.5
-- fix: 修复lint代码报错 
+
+- fix: 修复 lint 代码报错
 
 ### 0.5.4
-- 集成lint工具：eslint + prettier + styleLint + commitlint
-- 添加git代码commit-msg 格式检查
-- 添加git代码 pre-commit 代码风格检查，格式化
+
+- 集成 lint 工具：eslint + prettier + styleLint + commitlint
+- 添加 git 代码 commit-msg 格式检查
+- 添加 git 代码 pre-commit 代码风格检查，格式化
 - docs 文档更新
 
 ### 0.5.3

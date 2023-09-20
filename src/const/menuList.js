@@ -28,6 +28,11 @@ export default [
         "title-cn": "Layout 布局",
         "title-en": "Layout",
         "path": "/fx/layout"
+      },
+      {
+        "title-cn": "Icon 图标",
+        "title-en": "Icon",
+        "path": "/fx/icon"
       }
     ]
   },
@@ -59,6 +64,16 @@ export default [
         "title-cn": "DropDown 下拉菜单",
         "title-en": "DropDown",
         "path": "/fx/dropDown"
+      },
+      {
+        "title-cn": "Switch 开关",
+        "title-en": "Switch",
+        "path": "/fx/switch"
+      },
+      {
+        "title-cn": "Textarea 文本域",
+        "title-en": "Textarea",
+        "path": "/fx/textarea"
       }
     ]
   },

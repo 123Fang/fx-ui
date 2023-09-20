@@ -1,7 +1,7 @@
 {
   "name": "fx-ui",
   "private": true,
-  "version": "0.5.5",
+  "version": "0.5.6",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "gc": "node scripts/gc.js",
     "ge": "node scripts/build-entry.js",
-    "new": "node scripts/create.js",
+    "new": "node scripts/create.js create",
     "precommit": "lint-staged -c ./.husky/.lintstagedrc -q --allow-empty",
     "gc2": "node test/gc.js"
   },

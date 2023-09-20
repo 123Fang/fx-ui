@@ -81,6 +81,18 @@ export default [
        path: 'drawer',
        name: 'Drawer 抽屉',
        component: () => import('/packages/drawer/doc/doc.md')
+     },{
+       path: 'switch',
+       name: 'Switch 开关',
+       component: () => import('/packages/switch/doc/doc.md')
+     },{
+       path: 'textarea',
+       name: 'Textarea 文本域',
+       component: () => import('/packages/textarea/doc/doc.md')
+     },{
+       path: 'icon',
+       name: 'Icon 图标',
+       component: () => import('/packages/icon/doc/doc.md')
      }
     ]
   }
