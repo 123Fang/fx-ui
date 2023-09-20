@@ -93,6 +93,14 @@ export default [
        path: 'icon',
        name: 'Icon 图标',
        component: () => import('/packages/icon/doc/doc.md')
+     },{
+       path: 'loading',
+       name: 'Loading 加载中',
+       component: () => import('/packages/loading/doc/doc.md')
+     },{
+       path: 'pagination',
+       name: 'Pagination 分页',
+       component: () => import('/packages/pagination/doc/doc.md')
      }
     ]
   }

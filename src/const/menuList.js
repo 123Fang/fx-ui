@@ -100,6 +100,11 @@ export default [
         "title-cn": "Menu 菜单",
         "title-en": "Menu",
         "path": "/fx/menu"
+      },
+      {
+        "title-cn": "Pagination 分页",
+        "title-en": "Pagination",
+        "path": "/fx/pagination"
       }
     ]
   },
@@ -126,6 +131,11 @@ export default [
         "title-cn": "Drawer 抽屉",
         "title-en": "Drawer",
         "path": "/fx/drawer"
+      },
+      {
+        "title-cn": "Loading 加载中",
+        "title-en": "Loading",
+        "path": "/fx/loading"
       }
     ]
   },
