@@ -20,7 +20,7 @@ const { push, currentRoute } = useRouter();
 const toHome = () => push("/");
 const fullPath = ref(currentRoute.value.fullPath)
 const tabIndex = ref(
-  fullPath == "/fx"
+  fullPath.value == "/fx"
     ? 1
     : sessionStorage.getItem("tabIndex") || 0
 );
@@ -57,13 +57,13 @@ const pageView = (item, index) => {
   if (item.path == "open") {
     window.open(item.url);
   } else {
-    if (item.path != fullPath) {
+    if (item.path != fullPath.value) {
       push(item.path);
     }
   }
 };
 onMounted(() => {
-  if (fullPath == "/fx") {
+  if (fullPath.value == "/fx") {
     sessionStorage.setItem("tabIndex", 1);
   }
 });

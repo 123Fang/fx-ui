@@ -73,6 +73,14 @@ export default [
        path: 'optfile',
        name: 'Optfile 文件选择',
        component: () => import('/packages/optfile/doc/doc.md')
+     },{
+       path: 'dropdown',
+       name: 'DropDown 下拉菜单',
+       component: () => import('/packages/dropdown/doc/doc.md')
+     },{
+       path: 'drawer',
+       name: 'Drawer 抽屉',
+       component: () => import('/packages/drawer/doc/doc.md')
      }
     ]
   }

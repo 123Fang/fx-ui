@@ -1,0 +1,7 @@
+{
+  "*.{js,cjs,mjs}": ["eslint --fix"],
+  "{!(package)*.json,*.code-snippets,.!(browserslist|npm)*rc}": ["prettier --write --parser json"],
+  "*.{css,scss,html}": ["stylelint --fix"],
+  "*.md": ["prettier --write"],
+  "*.vue": ["eslint --fix", "stylelint --fix"]
+}

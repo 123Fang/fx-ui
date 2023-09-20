@@ -54,6 +54,11 @@ export default [
         "title-cn": "Optfile 文件选择",
         "title-en": "Optfile",
         "path": "/fx/optfile"
+      },
+      {
+        "title-cn": "DropDown 下拉菜单",
+        "title-en": "DropDown",
+        "path": "/fx/dropDown"
       }
     ]
   },
@@ -101,6 +106,11 @@ export default [
         "title-cn": "Modal 弹窗",
         "title-en": "Modal",
         "path": "/fx/modal"
+      },
+      {
+        "title-cn": "Drawer 抽屉",
+        "title-en": "Drawer",
+        "path": "/fx/drawer"
       }
     ]
   },
