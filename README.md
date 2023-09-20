@@ -1,21 +1,4 @@
-<p align="center">
-  <a href="" target="_blank" rel="noopener noreferrer">
-    <img src="./src/assets/logo.jpeg" alt="Fx UI" width="180" style="width: 180px;" />
-  </a>
-</p>
-<h1 align="center">Fx UI</h1>
-<p align="center">
-  Highly customizability, performance pretty good
-</p>
-<p align="center">
-  <a href="" target="_blank">
-    <img src="https://img.shields.io/github/package-json/v/vexip-ui/vexip-ui" alt="NPM version"/>
-  </a>
-</p>
-
-<p align="center">
-  If you have created any awesome thing with Vexip UI and would like to showcase it on the official website, you can contact me. If you would like to contribute code, you are very welcome!
-</p>
+![Image text](https://github.com/123Fang/fx-ui/src/assets/logo.jpeg)
 
 
 ###### version:0.5.x
