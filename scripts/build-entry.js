@@ -93,7 +93,7 @@ function buildEntry() {
     if (["loading", "message", "confirm"].indexOf(name) === -1) {
       installTemplate.push(
         render(INSTALL_COMPONENT_TEMPLATE, {
-          name: componentName,
+          name: `f${name.slice(0, 1).toUpperCase() + name.slice(1)}`,
         })
       );
     }

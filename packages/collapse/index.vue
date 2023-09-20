@@ -5,12 +5,13 @@
 </template>
 
 <script setup>
-import fxCollapseItem from "../collapseItem/index.vue";
+// import fxCollapseItem from "../collapseItem/index.vue";
 import { onMounted, ref, getCurrentInstance } from "vue";
 defineOptions({
   name: 'fx-collapse'
 })
 const collapseRef = ref(null);
+// eslint-disable-next-line no-unused-vars
 const type = getCurrentInstance();
 onMounted(() => {
   // console.log(collapseRef.value);

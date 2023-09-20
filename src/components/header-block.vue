@@ -24,7 +24,6 @@ const tabIndex = ref(
     ? 1
     : sessionStorage.getItem("tabIndex") || 0
 );
-
 const state = reactive({
   tools: [
     {
@@ -52,14 +51,16 @@ const state = reactive({
 });
 const { tools } = state;
 const pageView = (item, index) => {
+  console.log(item, index)
   tabIndex.value = index;
   sessionStorage.setItem("tabIndex", index);
   if (item.path == "open") {
     window.open(item.url);
   } else {
-    if (item.path != fullPath.value) {
-      push(item.path);
-    }
+    push(item.path);
+    // if (item.path != fullPath.value) {
+    //   push(item.path);
+    // }
   }
 };
 onMounted(() => {

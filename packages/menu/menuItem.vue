@@ -27,7 +27,6 @@
           <i :class="iconClass"></i>
         </span>
       </div>
-      <!-- v-show="items.isOpen" v-if="items.children&&items.children.length" -->
       <transition name="slide-fade">
         <div
           class="fx-menu-item-position-box"
@@ -134,6 +133,7 @@ const spanClass = computed(() => {
 const IconRotate = (flag) => {
   meunIconRotate.value = flag;
 };
+// eslint-disable-next-line vue/no-mutating-props
 props.items.key = props.dataKey;
 const getParents = (option, key) => {
   for (var i in option) {

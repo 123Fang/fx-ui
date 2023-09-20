@@ -1,7 +1,6 @@
 <template>
   <div :class="['fx-tree-item-box']">
     <li>
-       <!-- :style="{'padding-left':index*15+'px'}" -->
       <div :class="['fx-tree-lable-box',{'label-active':tabIndexs === items.key,'fx-tree-lable-disabled':items.disabled}]" @click.stop.prevent="toggle(items)" :data-key="dataKey" :style="{'padding-left':index*15+'px'}">
         <span :class="[{rotate:icon!='fx-icon-arrow-right-filling'?false:items.isOpen},'fx-tree-lable-span']"><i :class="[{'fx-icon-arrow-right-filling':items.children&&items.children.length}]"></i></span>
         <span :class="['fx-tree-label-select-span',{'fx-tree-label-select-span-active':items.isSelected,'fx-tree-label-select-span-active-1':items.semiSelected}]" @click.stop="selectClick(items,index)" v-if="multiple"></span>
@@ -50,6 +49,7 @@ const props = defineProps({
     default:()=>[]
   }
 })
+// eslint-disable-next-line vue/no-mutating-props
 props.items.key=props.dataKey
 const height = ref(26+'px')
 const selectedLen = ref(0)
@@ -77,7 +77,7 @@ const isFolder = computed(()=>{
 })
 const toggle = (item) => {
   if(!item.disabled){
-    if (isFolder&&item.children&&item.children.length) {
+    if (isFolder.value&&item.children&&item.children.length) {
       item.isOpen = !item.isOpen
       if(!item.isOpen){
         setTimeout(()=>{

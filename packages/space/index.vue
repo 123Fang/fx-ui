@@ -1,6 +1,5 @@
 <template>
   <div class="fx-space" ref="spaceRef">
-    <!-- <slot></slot> -->
   </div>
 </template>
 <script>
@@ -13,8 +12,10 @@ export default {
       default: true,
     },
     size: {
-      type: Object,
-      default: [10, 10],
+      type: Array,
+      default() {
+        return [10, 10]
+      },
     },
     alignItems: {
       type: String,

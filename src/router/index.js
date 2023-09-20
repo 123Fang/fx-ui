@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { createRouter, createWebHashHistory } from "vue-router";
 import pagesRouter from "./routerPage/page.js";
 const router = createRouter({

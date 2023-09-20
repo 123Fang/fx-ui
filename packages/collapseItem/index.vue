@@ -4,7 +4,6 @@
       <span>标题</span>
       <i class="fx-icon-arrow-right" :class="{rotate:boxshow}"></i>
     </div>
-     <!-- v-show="boxshow" -->
     <transition name="slide-fade">
       <div class="fx-collapse-slot-box" v-show="boxshow">
         <div class="fx-slot-item-box">

@@ -1,15 +1,15 @@
+/* eslint-disable no-case-declarations */
 import inquirer from 'inquirer'
 import { red } from 'kolorist'
-import {genComponent, genDocRoute, genLibEntry } from './jobs/index.js'
-
+import { genComponent, genDocRoute, genLibEntry } from './jobs/index.js'
 
 // create type 支持项
-const CREATE_TYPES = ['component', 'lib-entry','doc-route']
+const CREATE_TYPES = ['component', 'lib-entry', 'doc-route']
 // 文档分类
-const DOCS_CATEGORIES = ['常规','通用', '数据', '交互', '其他']
+const DOCS_CATEGORIES = ['常规', '通用', '数据', '交互', '其他']
 
 //
-const DOCS_ROUTER = ['需要','不需要']
+const DOCS_ROUTER = ['需要', '不需要']
 
 export async function onCreate(cmd = {}) {
   let { type } = cmd
@@ -36,9 +36,11 @@ export async function onCreate(cmd = {}) {
   }
 
   // 如果获取的类型不在我们支持范围内，那么输出错误提示并重新选择
-  if (CREATE_TYPES.every((t) => type !== t)) {
+  if (CREATE_TYPES.every(t => type !== t)) {
     console.log(
-      red(`当前类型仅支持：${CREATE_TYPES.join(', ')}，收到不在支持范围内的 "${type}"，请重新选择！`)
+      red(
+        `当前类型仅支持：${CREATE_TYPES.join(', ')}，收到不在支持范围内的 "${type}"，请重新选择！`
+      )
     )
     return onCreate()
   }
@@ -52,7 +54,7 @@ export async function onCreate(cmd = {}) {
             name: 'name',
             type: 'input',
             message: '（必填）请输入组件 name（英文名称） ，将用作目录及文件名：',
-            validate: (value) => {
+            validate: value => {
               if (value.trim() === '') {
                 return '组件 name 是必填项！'
               }
@@ -63,7 +65,7 @@ export async function onCreate(cmd = {}) {
             name: 'title',
             type: 'input',
             message: '（必填）请输入组件中文名称，将用作文档列表显示：',
-            validate: (value) => {
+            validate: value => {
               if (value.trim() === '') {
                 return '组件名称是必填项！'
               }
@@ -102,7 +104,7 @@ export async function onCreate(cmd = {}) {
             name: 'name',
             type: 'input',
             message: '（必填）请输入组件 name（英文名称） ，将用作文档路由路径：',
-            validate: (value) => {
+            validate: value => {
               if (value.trim() === '') {
                 return '组件 name 是必填项！'
               }
@@ -113,7 +115,7 @@ export async function onCreate(cmd = {}) {
             name: 'title',
             type: 'input',
             message: '（必填）请输入组件中文名称，将用作文档列表显示：',
-            validate: (value) => {
+            validate: value => {
               if (value.trim() === '') {
                 return '组件名称是必填项！'
               }
@@ -127,9 +129,9 @@ export async function onCreate(cmd = {}) {
             choices: DOCS_CATEGORIES,
             default: 0
           }
-      ])
-      genDocRoute(routeInfo)
-      break
+        ])
+        genDocRoute(routeInfo)
+        break
       default:
         break
     }
