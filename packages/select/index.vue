@@ -1,136 +1,298 @@
 <template>
-  <div :class="selectClass">
-    <div :class="selectInputClass" @click="handleSelect">
-      <input type="text" readonly :placeholder="placeholder" @blur="blur" :value="updateModelVal">
-      <i :class="iconClass"></i>
+  <div
+    :class="[selectClass, customClass]"
+    :style="[
+      customClass ? {} : { width: parseInt(width) < 100 ? '100px' : width },
+    ]"
+    v-click-outside
+  >
+    <div :class="selectInputClass">
+      <input
+        type="text"
+        :readonly="!searchable"
+        :placeholder="selVal == '' ? placeholder : selVal"
+        :style="[customClass ? {} : customStyle]"
+        :class="[selVal == '' ? 'fx-select-input' : 'fx-select-input-value']"
+        :disabled="disabled"
+        @input="input"
+        :value="selVal"
+      />
+      <i :class="iconClass" :style="[{ transform: rotate }, fixIcon]"></i>
     </div>
-    <div class="fx-select-option" :style="optionStyles">
-      <div class="fx-select-option-find" :style="isOpenStyles">
-        <ul>
-          <li>sdsdsdsdsdss</li>
-          <li>sdsdsdsdsdss</li>
-          <li>sdsdsdsdsdss</li>
-          <li>sdsdsdsdsdss</li>
-          <li>sdsdsdsdsdss</li>
-          <li>sdsdsdsdsdss</li>
-          <li>sdsdsdsdsdss</li>
-          <li>sdsdsdsdsdss</li>
-          <li>sdsdsdsdsdss</li>
-          <li>sdsdsdsdsdss</li>
-          <li>sdsdsdsdsdss</li>
-          <li>sdsdsdsdsdss</li>
-          <li>sdsdsdsdsdss</li>
-          <li>sdsdsdsdsdss</li>
-          <li>sdsdsdsdsdss</li>
-          <li>sdsdsdsdsdss</li>
-          <li>sdsdsdsdsdss</li>
-          <li>sdsdsdsdsdss</li>
-          <li>sdsdsdsdsdss</li>
-          <li>sdsdsdsdsdss</li>
-        </ul>
+    <transition name="slide-fade">
+      <div class="fx-select-option" v-if="isShow">
+        <div class="fx-select-option-find">
+          <ul>
+            <li
+              class="fx-select-option-li"
+              v-for="(item, index) in optionsData"
+              :key="index"
+              @click="selChange(item, index)"
+              :class="{
+                'fx-select-active':
+                  activeIndex == index ||
+                  selVal == item[labelFiled] ||
+                  item.selected,
+                'fx-select-disabled': item.disabled,
+              }"
+            >
+              {{ item[labelFiled] }}
+              <i
+                class="iconfont fx-icon-select-bold"
+                v-if="multiple && item.selected"
+              ></i>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
-<script>
-export default {
-  name: "fx-select"
-}
-</script>
 <script setup>
-import { ref, computed, reactive } from 'vue'
+import {
+  ref,
+  computed,
+  reactive,
+  onMounted,
+  watch,
+  nextTick,
+  onUpdated,
+} from "vue";
+defineOptions({
+  name: 'fx-select'
+})
+const emit = defineEmits(["update:modelValue", "change"]);
 const props = defineProps({
-  updateModelVal: String,
+  modelValue: String | Array,
   placeholder: String,
+  customClass: String,
+  disabled: Boolean,
+  searchable: Boolean,
   size: {
     type: String,
-    default: "default"
-  }
-})
-const flag = ref(false)
-const state = reactive({
-  isOpenStyles: {
-    'height': '0px'
+    default: "default",
   },
-  optionStyles: {
-    'display': 'none'
+  width: {
+    type: String,
+    default: "260px",
+  },
+  height: {
+    type: String,
+    default: "",
+  },
+  options: {
+    type: Array,
+    default: () => {
+      return [];
+    },
+  },
+  //默认需要显示的label字段
+  labelFiled: {
+    type: String,
+    default: "label",
+  },
+  //默认需要显示的value字段
+  valueFiled: {
+    type: String,
+    default: "value",
+  },
+  multiple: Boolean,
+});
+props.options.forEach((item, index) => {
+  if (!props.multiple) {
+    item.selected = false;
+  } else {
+    props.modelValue.forEach((item1, index1) => {
+      if (item[props.valueFiled] == item1) {
+        item.selected = true;
+      }
+    });
+    console.log();
   }
-})
+});
+
+const activeIndex = ref(-1);
+const isShow = ref(false);
+const rotate = ref("rotate(0deg)");
+const optionsData = ref(props.options || []);
+const selVal = ref(
+  props.multiple
+    ? props.modelValue
+    : props.modelValue != ""
+    ? props.options.filter((item) => {
+        return item[props.valueFiled] == props.modelValue;
+      })[0][props.labelFiled]
+    : ""
+);
+/*1.增加选择框width和height属性的大小限制 高度最小是25px,width属性最小是100px
+ *2.动态计算下拉图标的行高
+ */
+const fixIcon = reactive({});
+
 // icon class
 const iconClass = computed(() => {
-  return [
-    'select-icon iconfont fx-icon-arrow-down',
-    flag.value ? 'select-icon-tranfromOut' : 'select-icon-tranfromIn'
-  ]
-})
+  return ["select-icon iconfont fx-icon-arrow-down"];
+});
+
+//根据自定义的组件尺寸适配组件里面的下拉框相对位置以及图标居中
+const customStyle = computed(() => {
+  let styles = {};
+  if (props.height) {
+    let height = parseInt(props.height) < 25 ? "25px" : props.height;
+    styles.height = height;
+    setFixIcon(height)
+  }
+  return styles;
+});
+
+const setFixIcon = (height) => {
+  fixIcon.lineHeight = height;
+  fixIcon.top = 0;
+  fixIcon.height = "100%";
+}
+
 // selece class
 const selectClass = computed(() => {
   return [
-    `fx-select-${props.size}`
-  ]
-})
+    `fx-select-${props.size}`,
+    props.disabled ? `fx-select-${props.size}-disabled` : "",
+  ];
+});
 // select input class
 const selectInputClass = computed(() => {
   return [
-    `fx-select-input-${props.size}`
-  ]
-})
-// isopen styles
+    "fx-select-input-box",
+    `fx-select-input-${props.size}`,
+    props.disabled ? `fx-select-input-${props.size}-disabled` : "",
+  ];
+});
+const blur = (e) => {
+  isShow.value = false;
+  rotate.value = "rotate(0deg)";
+};
 
-const blur = () => {
-  flag.value = false
-  new Promise((resolve, reject) => {
-    setTimeout(() => {
-      optionStyles.display = 'none'
-    }, 60)
-    resolve();
-  }).then(() => {
-    isOpenStyles.height = '0px'
+const input = (e) => {
+  selVal.value = e.target.value;
+  optionsData.value = [];
+  let filterList = props.options.filter((item) => {
+    return item[props.labelFiled].indexOf(e.target.value) != -1;
   });
-}
-const handleSelect = () => {
-  flag.value = !flag.value
-  if (flag.value) {
-    const n = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        isOpenStyles.height = '180px'
-      }, 20)
-      resolve();
-    }).then(() => {
-      optionStyles.display = 'block'
-    });
-
+  filterList.forEach((item, index) => {
+    optionsData.value.push(item);
+  });
+};
+const vClickOutside = {
+  beforeMount(el) {
+    let handler = (e) => {
+      if (!props.disabled) {
+        if (!props.multiple) {
+          if (
+            el.contains(e.target) &&
+            e.target.className.indexOf("fx-select-option-li") == -1
+          ) {
+            if (!isShow.value) {
+              isShow.value = !isShow.value;
+              if (isShow.value) {
+                rotate.value = "rotate(180deg)";
+              } else {
+                rotate.value = "rotate(0deg)";
+              }
+            }
+          } else {
+            if (isShow.value) {
+              blur();
+            }
+          }
+        } else {
+          if (el.contains(e.target)) {
+            if (!isShow.value) {
+              isShow.value = !isShow.value;
+              if (isShow.value) {
+                rotate.value = "rotate(180deg)";
+              } else {
+                rotate.value = "rotate(0deg)";
+              }
+            }
+          } else {
+            if (isShow.value) {
+              blur();
+            }
+          }
+        }
+      }
+    };
+    el.handler = handler;
+    if (typeof document !== "undefined") {
+      document.addEventListener("click", handler);
+    }
+  },
+  unmounted(el) {
+    if (typeof document !== "undefined") {
+      document.removeEventListener("click", el.handler);
+    }
+  },
+};
+// 选择事件
+let labels = [];
+let indexs = [];
+const selChange = (item, index) => {
+  if (!props.multiple) {
+    if (!item.disabled) {
+      activeIndex.value = index;
+      selVal.value = item[props.labelFiled];
+      emit("update:modelValue", item[props.valueFiled]);
+      emit("change", { lable: item.label, value: item.value, index: index });
+      blur();
+    }
   } else {
-    new Promise((resolve, reject) => {
-      setTimeout(() => {
-        optionStyles.display = 'none'
-      }, 60)
-      resolve();
-    }).then(() => {
-      isOpenStyles.height = '0px'
-    });
+    if (!item.disabled) {
+      Array.prototype.indexOf = function (val) {
+        for (var i = 0; i < this.length; i++) {
+          if (this[i] == val) return i;
+        }
+        return -1;
+      };
+      item.selected = !item.selected;
+      if (item.selected) {
+        selVal.value.push(item[props.valueFiled]);
+        labels.push(item.label);
+        indexs.push(index);
+      } else {
+        selVal.value.splice(selVal.value.indexOf(item[props.valueFiled]), 1);
+        labels.splice(labels.indexOf(item.label), 1);
+        indexs.splice(indexs.indexOf(index), 1);
+      }
+      emit("update:modelValue", selVal.value);
+      emit("change", { lable: labels, value: selVal.value, index: indexs });
+    }
   }
-}
-
-const { isOpenStyles, optionStyles } = state
+};
 </script>
 
 <style lang="scss" scoped>
+// 默认
+.fx-select-input-box,
 .fx-select-default {
   width: 100%;
-  height: auto;
+  height: 100%;
   margin: 0;
   position: relative;
-
+  .fx-select-multiple {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
   .fx-select-input-default {
     width: 100%;
-    height: auto;
+    height: 100%;
     margin: 0;
     box-sizing: border-box;
     position: relative;
-
     input {
+      height: 100%;
       width: 100%;
       font-size: 14px;
       outline: none;
@@ -143,17 +305,18 @@ const { isOpenStyles, optionStyles } = state
       cursor: pointer;
       border: 1px solid #dcdfe6f6;
       transition: all 0.2s ease;
-
       &:focus {
         border-color: #0e80eb;
       }
     }
-
-    input::placeholder {
+    .fx-select-input::placeholder {
       color: #c6c8cc;
       font-size: 14px;
     }
-
+    .fx-select-input-value::placeholder {
+      color: #626262;
+      font-size: 14px;
+    }
     .select-icon {
       position: absolute;
       right: 10px;
@@ -163,41 +326,36 @@ const { isOpenStyles, optionStyles } = state
       cursor: pointer;
       transform-origin: 50% 50%;
     }
-
     .select-icon-tranfromOut {
       transform: rotate(180deg);
     }
-
     .select-icon-tranfromIn {
       transform: rotate(0deg);
     }
-
   }
-
   .fx-select-option {
-    width: 100%;
+    min-width: 100%;
     height: auto;
     position: absolute;
     bottom: 0;
     border-radius: 4px;
     box-sizing: border-box;
     background-color: #fff;
-    top: 38px;
-
+    top: 100%;
+    z-index: 99;
     .fx-select-option-find {
       width: 100%;
-      max-height: 180px;
-      height: 0px;
+      max-height: 211px;
+      height: auto;
       position: relative;
       margin-top: 13px;
       padding: 4px 0px;
       box-sizing: border-box;
-      background-color: #FFFFFF;
+      background-color: #ffffff;
       border: 1px solid #dcdfe6f6;
       border-radius: 3px;
-      transition: all .1s ease;
-      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
-
+      transition: all 0.1s ease;
+      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
       &:before {
         box-sizing: content-box;
         width: 0px;
@@ -206,15 +364,14 @@ const { isOpenStyles, optionStyles } = state
         top: -15.7px;
         right: 50.27%;
         padding: 0;
-        border-bottom: 8px solid #FFFFFF;
+        border-bottom: 8px solid #ffffff;
         border-top: 8px solid transparent;
         border-left: 8px solid transparent;
         border-right: 8px solid transparent;
         display: block;
-        content: '';
+        content: "";
         z-index: 12;
       }
-
       &:after {
         box-sizing: content-box;
         width: 0px;
@@ -228,19 +385,44 @@ const { isOpenStyles, optionStyles } = state
         border-left: 9px solid transparent;
         border-right: 9px solid transparent;
         display: block;
-        content: '';
-        z-index: 10
+        content: "";
+        z-index: 10;
       }
-
       ul {
         width: 100%;
-        height: 100%;
-        overflow-y: auto;
+        max-height: 205px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        scrollbar-width: thin;
         margin: 0;
         padding: 0;
         list-style: none;
+        li {
+          padding: 0 12px;
+          line-height: 40px;
+          font-size: 14px;
+          cursor: pointer;
+          color: #626262;
+          user-select: none;
+          white-space: nowrap;
+          i {
+            float: right;
+          }
+          &:hover {
+            background: rgba(96, 98, 102, 0.1);
+          }
+        }
+        li.fx-select-active {
+          color: #0e80eb;
+        }
+        li.fx-select-disabled {
+          color: #9d9d9d;
+          cursor: no-drop;
+          &:hover {
+            background-color: #fff;
+          }
+        }
       }
-
       ul::-webkit-scrollbar {
         width: 5px;
         height: 1px;
@@ -257,30 +439,403 @@ const { isOpenStyles, optionStyles } = state
       }
     }
   }
+}
 
-  input::-webkit-input-placeholder {
-    /* WebKit, Blink, Edge */
-    color: #c6c8cc;
+// small
+.fx-select-small {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  position: relative;
+  .fx-select-input-small {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    position: relative;
+    input {
+      height: 100%;
+      width: 100%;
+      font-size: 13px;
+      outline: none;
+      border: 0;
+      margin: 0;
+      padding: 8px 28px 8px 8px;
+      box-sizing: border-box;
+      border-radius: 4px;
+      color: #606266;
+      cursor: pointer;
+      border: 1px solid #dcdfe6f6;
+      transition: all 0.2s ease;
+      &:focus {
+        border-color: #0e80eb;
+      }
+    }
+    .fx-select-input::placeholder {
+      color: #c6c8cc;
+      font-size: 14px;
+    }
+    .fx-select-input-value::placeholder {
+      color: #626262;
+      font-size: 14px;
+    }
+    .select-icon {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      color: #94969b;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      transform-origin: 50% 50%;
+    }
+    .select-icon-tranfromOut {
+      transform: rotate(180deg);
+    }
+    .select-icon-tranfromIn {
+      transform: rotate(0deg);
+    }
   }
+  .fx-select-option {
+    min-width: 100%;
+    height: auto;
+    position: absolute;
+    bottom: 0;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #fff;
+    top: 100%;
+    z-index: 99;
+    .fx-select-option-find {
+      width: 100%;
+      max-height: 211px;
+      height: auto;
+      position: relative;
+      margin-top: 13px;
+      padding: 4px 0px;
+      box-sizing: border-box;
+      background-color: #ffffff;
+      border: 1px solid #dcdfe6f6;
+      border-radius: 3px;
+      transition: all 0.1s ease;
+      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+      &:before {
+        box-sizing: content-box;
+        width: 0px;
+        height: 0px;
+        position: absolute;
+        top: -15.7px;
+        right: 50.27%;
+        padding: 0;
+        border-bottom: 8px solid #ffffff;
+        border-top: 8px solid transparent;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        display: block;
+        content: "";
+        z-index: 12;
+      }
+      &:after {
+        box-sizing: content-box;
+        width: 0px;
+        height: 0px;
+        position: absolute;
+        top: -18px;
+        right: 50%;
+        padding: 0;
+        border-bottom: 9px solid #dcdfe6f6;
+        border-top: 9px solid transparent;
+        border-left: 9px solid transparent;
+        border-right: 9px solid transparent;
+        display: block;
+        content: "";
+        z-index: 10;
+      }
+      ul {
+        width: 100%;
+        max-height: 205px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        scrollbar-width: thin;
+        li {
+          padding: 0 12px;
+          line-height: 35px;
+          font-size: 13px;
+          cursor: pointer;
+          color: #626262;
+          user-select: none;
+          white-space: nowrap;
+          i {
+            float: right;
+          }
+          &:hover {
+            background: rgba(96, 98, 102, 0.1);
+          }
+        }
+        li.fx-select-active {
+          color: #0e80eb;
+        }
+        li.fx-select-disabled {
+          color: #9d9d9d;
+          cursor: no-drop;
+          &:hover {
+            background-color: #fff;
+          }
+        }
+      }
+      ul::-webkit-scrollbar {
+        width: 5px;
+        height: 1px;
+      }
 
-  input:-moz-placeholder {
-    /* Mozilla Firefox 4 ~ 18 */
-    color: #c6c8cc;
-  }
+      ul::-webkit-scrollbar-thumb {
+        border-radius: 8px;
+        background: #d5d5d6;
+      }
 
-  input::-moz-placeholder {
-    /* Mozilla Firefox 19+ */
-    color: #c6c8cc;
+      ul::-webkit-scrollbar-track {
+        border-radius: 8px;
+        background: #fff;
+      }
+    }
   }
+}
 
-  input:-ms-input-placeholder {
-    /* Internet Explorer 10 ~ 11 */
-    color: #c6c8cc;
+// mini
+.fx-select-mini {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  position: relative;
+  .fx-select-input-mini {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    position: relative;
+    input {
+      height: 100%;
+      width: 100%;
+      font-size: 12px;
+      outline: none;
+      border: 0;
+      margin: 0;
+      padding: 7px 26px 7px 6px;
+      box-sizing: border-box;
+      border-radius: 4px;
+      color: #606266;
+      cursor: pointer;
+      border: 1px solid #dcdfe6f6;
+      transition: all 0.2s ease;
+      &:focus {
+        border-color: #0e80eb;
+      }
+    }
+    .fx-select-input::placeholder {
+      color: #c6c8cc;
+      font-size: 12px;
+    }
+    .fx-select-input-value::placeholder {
+      color: #626262;
+      font-size: 12px;
+    }
+    .select-icon {
+      position: absolute;
+      right: 10px;
+      top: 8px;
+      color: #94969b;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      transform-origin: 50% 50%;
+    }
+    .select-icon-tranfromOut {
+      transform: rotate(180deg);
+    }
+    .select-icon-tranfromIn {
+      transform: rotate(0deg);
+    }
   }
+  .fx-select-option {
+    min-width: 100%;
+    height: auto;
+    position: absolute;
+    bottom: 0;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #fff;
+    top: 100%;
+    z-index: 99;
+    .fx-select-option-find {
+      width: 100%;
+      max-height: 185px;
+      height: auto;
+      position: relative;
+      margin-top: 13px;
+      padding: 4px 0px;
+      box-sizing: border-box;
+      background-color: #ffffff;
+      border: 1px solid #dcdfe6f6;
+      border-radius: 3px;
+      transition: all 0.1s ease;
+      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+      &:before {
+        box-sizing: content-box;
+        width: 0px;
+        height: 0px;
+        position: absolute;
+        top: -15.7px;
+        right: 50.27%;
+        padding: 0;
+        border-bottom: 8px solid #ffffff;
+        border-top: 8px solid transparent;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        display: block;
+        content: "";
+        z-index: 12;
+      }
+      &:after {
+        box-sizing: content-box;
+        width: 0px;
+        height: 0px;
+        position: absolute;
+        top: -18px;
+        right: 50%;
+        padding: 0;
+        border-bottom: 9px solid #dcdfe6f6;
+        border-top: 9px solid transparent;
+        border-left: 9px solid transparent;
+        border-right: 9px solid transparent;
+        display: block;
+        content: "";
+        z-index: 10;
+      }
+      ul {
+        width: 100%;
+        max-height: 179px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        scrollbar-width: thin;
+        li {
+          padding: 0 12px;
+          line-height: 32px;
+          font-size: 12px;
+          cursor: pointer;
+          color: #626262;
+          user-select: none;
+          white-space: nowrap;
+          i {
+            float: right;
+          }
+          &:hover {
+            background: rgba(96, 98, 102, 0.1);
+          }
+        }
+        li.fx-select-active {
+          color: #0e80eb;
+        }
+        li.fx-select-disabled {
+          color: #9d9d9d;
+          cursor: no-drop;
+          &:hover {
+            background-color: #fff;
+          }
+        }
+      }
+      ul::-webkit-scrollbar {
+        width: 5px;
+        height: 1px;
+      }
 
-  input::-ms-input-placeholder {
-    /* Microsoft Edge */
-    color: #c6c8cc;
+      ul::-webkit-scrollbar-thumb {
+        border-radius: 8px;
+        background: #d5d5d6;
+      }
+
+      ul::-webkit-scrollbar-track {
+        border-radius: 8px;
+        background: #fff;
+      }
+    }
   }
+}
+
+.fx-select-default-disabled {
+  cursor: no-drop;
+  .fx-select-input-default-disabled {
+    cursor: no-drop;
+    input {
+      cursor: no-drop;
+    }
+    .fx-select-input-value::placeholder {
+      color: #c6c8cc;
+      font-size: 14px;
+    }
+  }
+}
+.fx-select-small-disabled {
+  cursor: no-drop;
+  .fx-select-input-small-disabled {
+    cursor: no-drop;
+    input {
+      cursor: no-drop;
+      color: #c6c8cc;
+    }
+    .fx-select-input-value::placeholder {
+      color: #c6c8cc;
+      font-size: 14px;
+    }
+  }
+}
+.fx-select-mini-disabled {
+  cursor: no-drop;
+  .fx-select-input-mini-disabled {
+    cursor: no-drop;
+    input {
+      cursor: no-drop;
+    }
+    .fx-select-input-value::placeholder {
+      color: #c6c8cc;
+      font-size: 12px;
+    }
+  }
+}
+input::-webkit-input-placeholder {
+  /* WebKit, Blink, Edge */
+  color: #c6c8cc;
+}
+input:-moz-placeholder {
+  /* Mozilla Firefox 4 ~ 18 */
+  color: #c6c8cc;
+}
+input::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #c6c8cc;
+}
+input:-ms-input-placeholder {
+  /* Internet Explorer 10 ~ 11 */
+  color: #c6c8cc;
+}
+input::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #c6c8cc;
+}
+.slide-fade-enter-active {
+  transition: all 0.2s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
 }
 </style>

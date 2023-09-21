@@ -73,7 +73,8 @@ var recursiveFunction = function(items){
   
 }
 const isFolder = computed(()=>{
-  return props.children.items && props.items.children.length;
+  // return props.children.items && props.items.children.length;
+  return props.items.children.length;
 })
 const toggle = (item) => {
   if(!item.disabled){

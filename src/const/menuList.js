@@ -33,6 +33,11 @@ export default [
         "title-cn": "Icon 图标",
         "title-en": "Icon",
         "path": "/fx/icon"
+      },
+      {
+        "title-cn": "Color 颜色",
+        "title-en": "Color",
+        "path": "/fx/color"
       }
     ]
   },
@@ -74,6 +79,16 @@ export default [
         "title-cn": "Textarea 文本域",
         "title-en": "Textarea",
         "path": "/fx/textarea"
+      },
+      {
+        "title-cn": "Select 下拉框",
+        "title-en": "Select",
+        "path": "/fx/select"
+      },
+      {
+        "title-cn": "Radio 单选",
+        "title-en": "Radio",
+        "path": "/fx/radio"
       }
     ]
   },
@@ -105,6 +120,16 @@ export default [
         "title-cn": "Pagination 分页",
         "title-en": "Pagination",
         "path": "/fx/pagination"
+      },
+      {
+        "title-cn": "Table 表格",
+        "title-en": "Table",
+        "path": "/fx/table"
+      },
+      {
+        "title-cn": "Tree 树形控件",
+        "title-en": "Tree",
+        "path": "/fx/tree"
       }
     ]
   },

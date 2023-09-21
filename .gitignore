@@ -15,6 +15,9 @@ dist-ssr
 # for test
 test
 
+# for check words spell
+cspell.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

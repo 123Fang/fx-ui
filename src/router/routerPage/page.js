@@ -101,6 +101,26 @@ export default [
        path: 'pagination',
        name: 'Pagination 分页',
        component: () => import('/packages/pagination/doc/doc.md')
+     },{
+       path: 'color',
+       name: 'Color 颜色',
+       component: () => import('/packages/color/doc/doc.md')
+     },{
+       path: 'select',
+       name: 'Select 下拉框',
+       component: () => import('/packages/select/doc/doc.md')
+     },{
+       path: 'radio',
+       name: 'Radio 单选',
+       component: () => import('/packages/radio/doc/doc.md')
+     },{
+       path: 'table',
+       name: 'Table 表格',
+       component: () => import('/packages/table/doc/doc.md')
+     },{
+       path: 'tree',
+       name: 'Tree 树形控件',
+       component: () => import('/packages/tree/doc/doc.md')
      }
     ]
   }

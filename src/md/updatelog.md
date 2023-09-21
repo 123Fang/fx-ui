@@ -1,5 +1,10 @@
 ## fx-ui 更新日志
 
+
+### 0.5.8
+
+- 添加favicon-ico, doc更新
+
 ### 0.5.7
 
 - docs 更新， README.md更新
