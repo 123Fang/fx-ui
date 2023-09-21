@@ -2,14 +2,21 @@ import { defineConfig } from "vite";
 import Vue from "@vitejs/plugin-vue";
 // import Markdown from "vite-plugin-md";
 import Markdown from "vite-plugin-vue-markdown";
+import vueJsx from '@vitejs/plugin-vue-jsx'
+// import { defineConfig } from 'vitest/config'
+import { fileURLToPath } from 'url';
+import path from 'path';
 
-import { resolve } from "path";
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
+
 export default defineConfig({
   plugins: [
     Vue({
       include: [/\.vue$/, /\.md$/], // <--
     }),
     Markdown(),
+    vueJsx() // 针对测试用例中jsx的编译
   ],
   build: {
     rollupOptions: {
@@ -29,7 +36,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": resolve(__dirname, "src"),
+      "@": path.resolve(dirname, "src"),
     },
   },
   css: {
@@ -39,4 +46,13 @@ export default defineConfig({
       },
     },
   },
+  // vitest
+  test: {
+    clearMocks: true,
+    include: ['./packages/**/__test__/*.jsx'],
+    environment: 'jsdom',
+    transformMode: {
+      web: [/\.[jt]sx$/],
+    },
+  }
 });

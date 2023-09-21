@@ -37,7 +37,7 @@ const props = defineProps({
   },
   leftIcon: String,
   rightIcon: String,
-  localing: Boolean,
+  loading: Boolean,
 });
 const mBtnDeaultStyle = {
   background: props.customColor,
@@ -67,7 +67,7 @@ const isIconClass = computed(() => {
   return [
     "iconfont",
     props.leftIcon || props.rightIcon,
-    props.localing
+    props.loading
       ? props.leftIcon == "fx-icon-loading1" ||
         props.leftIcon == "fx-icon-loading2" ||
         props.leftIcon == "fx-icon-loading3" ||

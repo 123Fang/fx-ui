@@ -1,13 +1,22 @@
 ## fx-ui 更新日志
 
 
+### 0.5.9
+
+- 集成测试vitest
+- 添加测试用例
+- doc更新
+
 ### 0.5.8
 
-- 添加favicon-ico, doc更新
+- 添加favicon-ico
+- doc更新
 
 ### 0.5.7
 
-- docs 更新， README.md更新
+- docs 更新
+- README.md更新
+
 ### 0.5.6
 
 - docs 更新
