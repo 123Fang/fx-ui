@@ -18,8 +18,11 @@ module.exports = {
     }
   ],
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module'
+    ecmaVersion: 'latest', // 启用最新的 ES 语法
+    sourceType: 'module', // 默认为script，如果使用 ES Module 则应设置为module
+    ecmaFeatures: { // 表示想使用的额外语言特性
+      jsx: true // 开启 jsx
+    }
   },
   plugins: ['vue'],
   rules: {
