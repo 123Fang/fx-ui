@@ -1,15 +1,15 @@
 <template>
-  <button :class="isClass" :style="styles">
+  <button :class="isClass" :style="styles" @click="handleClick">
     <i :class="isIconClass" v-if="leftIcon"></i>
     <span
       :style="{
         'margin-left':
-          $slot['default'] == undefined ? '0px' : leftIcon ? '4px' : '0px',
+          $slot['default'] === undefined ? '0px' : leftIcon ? '4px' : '0px',
         'margin-right':
-          $slot['default'] == undefined ? '0px' : rightIcon ? '4px' : '0px',
+          $slot['default'] === undefined ? '0px' : rightIcon ? '4px' : '0px',
       }"
-      ><slot
-    /></span>
+      ><slot/>
+    </span>
     <i :class="isIconClass" v-if="rightIcon"></i>
   </button>
 </template>
@@ -39,6 +39,7 @@ const props = defineProps({
   rightIcon: String,
   loading: Boolean,
 });
+const emit = defineEmits(['click'])
 const mBtnDeaultStyle = {
   background: props.customColor,
   border: props.customColor,
@@ -47,13 +48,13 @@ const mBtnDeaultStyle = {
 const $slot = useSlots();
 const isClass = computed(() => {
   return [
-    props.size == "default"
+    props.size === "default"
       ? "fx-button"
-      : props.size == "medium"
+      : props.size === "medium"
       ? "fx-button-medium"
-      : props.size == "small"
+      : props.size === "small"
       ? "fx-button-small"
-      : props.size == "mini"
+      : props.size === "mini"
       ? "fx-button-mini"
       : "fx-button",
     props.type ? (props.disabled ? "" : `fx-button-${props.type}`) : "",
@@ -68,18 +69,18 @@ const isIconClass = computed(() => {
     "iconfont",
     props.leftIcon || props.rightIcon,
     props.loading
-      ? props.leftIcon == "fx-icon-loading1" ||
-        props.leftIcon == "fx-icon-loading2" ||
-        props.leftIcon == "fx-icon-loading3" ||
-        props.leftIcon == "fx-icon-loading4" ||
-        props.leftIcon == "fx-icon-loading5" ||
-        props.leftIcon == "fx-icon-loading6" ||
-        props.rightIcon == "fx-icon-loading1" ||
-        props.rightIcon == "fx-icon-loading2" ||
-        props.rightIcon == "fx-icon-loading3" ||
-        props.rightIcon == "fx-icon-loading4" ||
-        props.rightIcon == "fx-icon-loading5" ||
-        props.rightIcon == "fx-icon-loading6"
+      ? props.leftIcon === "fx-icon-loading1" ||
+        props.leftIcon === "fx-icon-loading2" ||
+        props.leftIcon === "fx-icon-loading3" ||
+        props.leftIcon === "fx-icon-loading4" ||
+        props.leftIcon === "fx-icon-loading5" ||
+        props.leftIcon === "fx-icon-loading6" ||
+        props.rightIcon === "fx-icon-loading1" ||
+        props.rightIcon === "fx-icon-loading2" ||
+        props.rightIcon === "fx-icon-loading3" ||
+        props.rightIcon === "fx-icon-loading4" ||
+        props.rightIcon === "fx-icon-loading5" ||
+        props.rightIcon === "fx-icon-loading6"
         ? "fx-icon-loading"
         : ""
       : "",
@@ -87,13 +88,18 @@ const isIconClass = computed(() => {
 });
 const styles = computed(() => {
   return [
-    props.customColor == ""
+    props.customColor === ""
       ? {}
-      : props.type == "default"
+      : props.type === "default"
       ? {}
       : mBtnDeaultStyle,
   ];
 });
+
+const handleClick = (e) => {
+  if (props.disabled || props.loading) return
+  emit('click',e)
+}
 </script>
 <style>
 @import url("../../styles/iconfont.css");
