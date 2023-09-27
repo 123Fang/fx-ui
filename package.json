@@ -3,6 +3,15 @@
   "private": true,
   "version": "0.6.1",
   "type": "module",
+  "main": "./dist/fx-ui.umd.js",
+  "module": "./dist/fx-ui.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/fx-ui.es.js",
+      "require": "./dist/fx-ui.umd.js"
+    }
+  },
+  "homepage": "http://120.27.143.79/fx-ui",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

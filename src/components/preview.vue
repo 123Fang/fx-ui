@@ -55,9 +55,15 @@ async function getSourceCode() {
       )
     ).default;
   } else {
-    sourceCode.value = await fetch(
-      `/packages/${props.compName}/doc/${props.demoName}.vue`
-    ).then((res) => res.text());
+    console.log('123123')
+    sourceCode.value = await import(
+      `../../packages/${props.compName}/doc/${props.demoName}.vue?raw`
+    ).then((res) => {
+      console.log('res--', res.default)
+      return res.default
+    }).catch((err) => {
+      console.log('err---',err)
+    });
   }
 }
 const copyCode = () => {
