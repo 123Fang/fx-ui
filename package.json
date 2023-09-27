@@ -3,13 +3,14 @@
   "private": true,
   "version": "0.6.1",
   "type": "module",
-  "main": "./dist/fx-ui.umd.js",
-  "module": "./dist/fx-ui.es.js",
+  "main": "./dist/fx-ui-vue.umd.js",
+  "module": "./dist/fx-ui-vue.es.js",
   "exports": {
     ".": {
-      "import": "./dist/fx-ui.es.js",
-      "require": "./dist/fx-ui.umd.js"
-    }
+      "import": "./dist/fx-ui-vue.es.js",
+      "require": "./dist/fx-ui-vue.umd.js"
+    },
+    "./*": "./*"
   },
   "homepage": "http://120.27.143.79/fx-ui",
   "scripts": {

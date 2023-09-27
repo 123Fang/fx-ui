@@ -31,7 +31,7 @@ export default defineConfig({
     },
     lib: {
       entry: "./packages/index.js",
-      name: "fx-ui",
+      name: "fx-ui-vue",
     },
   },
   resolve: {
