@@ -23,18 +23,12 @@ pnpm new 命令有三项选择:
 
 ### 快速使用
 ```
-npm install  fx-ui --save
-cnpm install  fx-ui --save
+npm install  fx-u-vue --save
+cnpm install  fx-ui-vue --save
 ```
 ### 引入
 ```
-import { createApp } from 'vue'
-import App from '@/App.vue'
-import mzlUi from 'mzl-ui'
-import '../node_modules/mzl-ui/dist/style.css'
-const app = createApp(App)
-app.use(mzlUi)
-app.mount('#app')
+
 ```
 ### 愉快开始
 ```
