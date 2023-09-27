@@ -29,9 +29,11 @@ export default defineConfig({
         },
       },
     },
+    outDir: './fx-ui-vue-dist/dist',
     lib: {
       entry: "./packages/index.js",
       name: "fx-ui-vue",
+      fileName: 'fx-ui-vue',
     },
   },
   resolve: {

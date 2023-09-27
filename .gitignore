@@ -18,6 +18,9 @@ test
 # for check words spell
 cspell.json
 
+#for build dist
+fx-ui-vue-dist
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
