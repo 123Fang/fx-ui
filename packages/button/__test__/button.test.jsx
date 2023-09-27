@@ -25,7 +25,7 @@ describe('Button.vue', () => {
   it('disabled', async () => {
     const isDisabled = ref(true)
 
-    const wrapper = mount(() => <Button disabled={isDisabled} />)
+    const wrapper = mount(() => <Button disabled={isDisabled.value} />)
 
     expect(wrapper.classes()).toContain('fx-button-default-disabled')
 

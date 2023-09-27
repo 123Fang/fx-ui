@@ -1,7 +1,7 @@
 <template>
   <div class="fx-badge">
       <slot></slot>
-      <div v-show="!hidden">
+      <div v-if="!hidden" class="fx-badge-content">
           <sup v-if="!isDot" :class='type' class="badge">
               <span v-if="typeof value === 'number'">{{ value <= max ? value : `${max}+` }}</span>
                       <span v-else>{{ value }}</span>
