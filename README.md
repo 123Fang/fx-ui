@@ -16,13 +16,14 @@ pnpm new
 <br>
 
 #### 根据提示选择，输入组件名，即可生成模版： 
-- 1 是否生成组件模版文件 ？
-    1-1 是否生成此组件对应的路由页面 ？
-- 2 是否生成组件库打包入口文件 ？
-- 3 自动生成组件库对应的路由页面 ？
+
+<img width="685" alt="截屏2023-09-20 15 52 45" src="https://github.com/123Fang/fx-ui/assets/38906235/c657612b-18ba-4416-88a9-a71c8eb6f56e">
+
+<img width="782" alt="截屏2023-09-20 15 53 05" src="https://github.com/123Fang/fx-ui/assets/38906235/0cbf7f93-6dc5-473a-a66f-5d74ebd0a5d9">
+
+<img width="794" alt="截屏2023-09-20 15 54 03" src="https://github.com/123Fang/fx-ui/assets/38906235/26ccb0b1-38b3-460b-a245-aa2e5a686579">
 
 <br>
-
 
 ### 使用
 ```shell
