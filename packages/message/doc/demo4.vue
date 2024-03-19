@@ -8,15 +8,16 @@
 
 <!-- js -->
 <script setup>
-import Message from "../index.js"; //此处为本地示例，请使用import {Message} from "fx-ui";引入
+import { fMessage } from "fx-ui-vue"
+
 const openMsg1 = () => {
-  Message({
+  fMessage({
     text: "自定义Icon！",
     icon: "fx-icon-collection_fill",
   });
 };
 const openMsg2 = () => {
-  Message({
+  fMessage({
     text: "5秒后消失！",
     icon: "fx-icon-good",
     timeout: 5000,

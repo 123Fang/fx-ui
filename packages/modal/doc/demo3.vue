@@ -23,7 +23,7 @@
 <!-- js -->
 <script setup>
 import { ref } from "vue";
-import Message from "../../message/index.js"; //此处为本地示例，请使用import {Message} from "mzl-ui";引入
+import { fMessage } from "fx-ui-vue"
 const modalShow = ref(false);
 const value = ref("");
 const openModal = () => {
@@ -31,11 +31,11 @@ const openModal = () => {
 };
 const send = () => {
   if (value.value == "") {
-    Message({ type: "warn", text: "请输入内容!" });
+    fMessage({ type: "warn", text: "请输入内容!" });
   } else {
     modalShow.value = false;
     setTimeout(() => {
-      Message({ type: "success", text: "发送成功!" });
+      fMessage({ type: "success", text: "发送成功!" });
     }, 500);
   }
 };

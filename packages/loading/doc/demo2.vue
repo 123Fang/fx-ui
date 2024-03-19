@@ -6,7 +6,6 @@
 <!-- js -->
 <script setup>
 import { getCurrentInstance } from "vue";
-import Loading from "../index.js"; //此处为本地示例，请使用import { Loading } from "fx-ui";
 const instance = getCurrentInstance();
 const openLoading = () => {
   instance.proxy.$Loading.show();

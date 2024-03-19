@@ -18,15 +18,15 @@
 <!-- js -->
 <script setup>
 import { ref } from "vue";
-import Message from "../../message/index.js"; //此处为本地示例，请使用import {Message} from "fx-ui";引入
+import { fMessage } from 'fx-ui-vue'
 const drawerShow = ref(false);
 const openDrawer = () => {
   drawerShow.value = true;
 };
 const confirmFn = () => {
-  Message({ text: "确认事件" });
+  fMessage({ text: "确认事件" });
 };
 const cancelFn = () => {
-  Message({ text: "取消事件" });
+  fMessage({ text: "取消事件" });
 };
 </script>

@@ -1,9 +1,12 @@
-## fx-ui 更新日志
+## fx-ui-vue 更新日志
 
+### 0.7.0
+
+- docs 更新，支持在线编辑组件功能
 
 ### 0.6.2
 
-- README.md更新
+- README.md 更新
 - 修改 package.json
 
 ### 0.6.1
@@ -12,28 +15,28 @@
 
 ### 0.6.0
 
-- eslint配置中开启jsx功能
+- eslint 配置中开启 jsx 功能
 
 ### 0.5.9
 
-- 集成测试vitest
+- 集成测试 vitest
 - 添加测试用例
-- doc更新
+- doc 更新
 
 ### 0.5.8
 
-- 添加favicon-ico
-- doc更新
+- 添加 favicon-ico
+- doc 更新
 
 ### 0.5.7
 
 - docs 更新
-- README.md更新
+- README.md 更新
 
 ### 0.5.6
 
 - docs 更新
-- 生成组件md脚本修复
+- 生成组件 md 脚本修复
 - add icon demo
 
 ### 0.5.5

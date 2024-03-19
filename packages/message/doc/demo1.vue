@@ -8,16 +8,16 @@
 
 <!-- js -->
 <script setup>
-import Message from '../index.js' //此处为本地示例，请使用import {Message} from "fx-ui";引入
+import { fMessage } from "fx-ui-vue"
 import { h } from 'vue'
 const openMsg = () => {
-  Message({
+  fMessage({
     text: '默认消息提示'
   })
 }
 
 const openVNodeMsg = () => {
-  Message({
+  fMessage({
     text: h('p', null, '默认消息提示(VNode)')
   })
 }

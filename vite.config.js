@@ -39,6 +39,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(dirname, "src"),
+      'fx-ui-vue': path.resolve(dirname, "packages/index.js")
     },
   },
   css: {

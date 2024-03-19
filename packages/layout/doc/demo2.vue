@@ -22,7 +22,7 @@
   </fx-row>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .col-box {
   height: 34px;
   margin-bottom: 10px;

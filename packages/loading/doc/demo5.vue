@@ -5,9 +5,9 @@
 
 <!-- js -->
 <script setup>
-  import Loading from "../index.js"; //此处为本地示例，请使用import { Loading } from "fx-ui";
+import { fLoading } from "fx-ui-vue"
   const openLoading = () => {
-    Loading.show({
+    fLoading.show({
       text:'正在加载fxl-ui...',
       icon:'fx-icon-loading3',
       scrollLock:true,
@@ -16,7 +16,7 @@
       showIcon:true,
     })
     setTimeout(()=>{
-      Loading.hide()
+      fLoading.hide()
     },5000)
   }
 </script>

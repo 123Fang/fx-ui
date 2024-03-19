@@ -10,9 +10,16 @@
         v-highlight
       ><code class="language-html">{{ sourceCode }}</code></pre>
     </transition>
-    <div class="showCode" @click="showOrhideCode">
-      <span>{{ showCode ? "隐藏代码" : "显示代码" }}</span>
-      <i class="fx-icon-code"></i>
+    <div class="showCode">
+      <div @click="showOrhideCode">
+        <span>{{ showCode ? "隐藏代码" : "显示代码" }}</span>
+        <i class="fx-icon-code"></i>
+      </div>
+      <div>
+        <a :style="{textDecoration: 'none',color: 'inherit'}" :href="codePlaygroundUrl" target="_blank">在线编辑</a>
+        <i class="fx-icon-electronics"></i>
+      </div>
+      
     </div>
     <textarea id="inputCopy" />
   </div>
@@ -45,6 +52,17 @@ const showOrhideCode = () => {
     border.value = "1px solid rgba(0,0,0,.06)";
   }
 };
+const utoa = (data) => {
+  return btoa(unescape(encodeURIComponent(data)));
+};
+let codePlaygroundUrl = ref("")
+const serialize = (data) => {
+  const files = {
+    'src/App.vue': data
+  };
+  return 'http://localhost:5175/#' + utoa(JSON.stringify(files));
+};
+
 const sourceCode = ref("");
 async function getSourceCode() {
   const isDev = import.meta.env.MODE === "development";
@@ -54,12 +72,13 @@ async function getSourceCode() {
         /* @vite-ignore */ `/packages/${props.compName}/doc/${props.demoName}.vue?raw`
       )
     ).default;
+    codePlaygroundUrl.value = serialize(sourceCode.value)
   } else {
-    console.log('123123')
     sourceCode.value = await import(
       `../../packages/${props.compName}/doc/${props.demoName}.vue?raw`
     ).then((res) => {
-      console.log('res--', res.default)
+      console.log('code:', res.default)
+      codePlaygroundUrl.value = serialize(res.default)
       return res.default
     }).catch((err) => {
       console.log('err---',err)
@@ -133,13 +152,14 @@ onMounted(() => {
   }
   .showCode {
     width: 100%;
-    line-height: 40px;
+    line-height: 36px;
     font-size: 14px;
     text-align: center;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    background: #f9f9f9;
+
+    background: rgb(233, 233, 235);
     box-shadow: 0px 16px 15px -16px rgb(0 0 0 / 10%);
     color: #505050;
     cursor: pointer;
@@ -149,8 +169,8 @@ onMounted(() => {
     i.rotate {
       transform: rotate(180deg);
     }
-    &:hover {
-      background: #f9f9f9;
+    >div:hover {
+      // background: #f9f9f9;
       color: #0e80eb;
     }
   }

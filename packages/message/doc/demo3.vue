@@ -11,33 +11,33 @@
 
 <!-- js -->
 <script setup>
-import Message from "../index.js"; //此处为本地示例，请使用import {Message} from "fx-ui";引入
+import {fMessage} from "fx-ui-vue"
 const openInfo = () => {
-  Message({
+  fMessage({
     type: "info",
     text: "文本消息提示!",
   });
 };
 const openSuccess = () => {
-  Message({
+  fMessage({
     type: "success",
     text: "成功状态消息提示!",
   });
 };
 const openWarn = () => {
-  Message({
+  fMessage({
     type: "warn",
     text: "警告状态消息提示!",
   });
 };
 const openError = () => {
-  Message({
+  fMessage({
     type: "error",
     text: "错误状态消息提示!",
   });
 };
 const openCustom = () => {
-  Message({
+  fMessage({
     type: "custom",
     text: "自定义消息弹窗样式",
     icon: "fx-icon-file-common",

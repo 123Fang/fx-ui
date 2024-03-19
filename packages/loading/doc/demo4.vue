@@ -5,15 +5,15 @@
 
 <!-- js -->
 <script setup>
-import Loading from "../index.js"; //此处为本地示例，请使用import { Loading } from "fx-ui";
+import { fLoading } from "fx-ui-vue"
   import logoUrl from '../../../src/assets/logo.jpeg'
   const openLoading = () => {
-    Loading.show({
+    fLoading.show({
       text:"正在努力加载中...",
       img: logoUrl
     })
     setTimeout(()=>{
-      Loading.hide()
+      fLoading.hide()
     },5000)
   }
 </script>

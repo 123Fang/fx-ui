@@ -16,13 +16,13 @@
 <!-- js -->
 <script setup>
   import { reactive } from 'vue';
-  import Loading from "../index.js"; //此处为本地示例，请使用import { Loading } from "fx-ui";
+import { fLoading } from "fx-ui-vue"
   const openLoading = () => {
-    Loading.show({
+    fLoading.show({
       target:"#loadingTextBox"
     })
     setTimeout(()=>{
-      Loading.hide()
+      fLoading.hide()
     },5000)
   }
   const state = reactive({

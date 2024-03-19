@@ -1,5 +1,5 @@
 {
-  "name": "fx-ui",
+  "name": "fx-ui-vue",
   "private": false,
   "version": "0.6.2",
   "type": "module",
@@ -12,7 +12,7 @@
     },
     "./*": "./*"
   },
-  "homepage": "http://120.27.143.79/fx-ui",
+  "homepage": "http://120.78.136.2/fxui",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
