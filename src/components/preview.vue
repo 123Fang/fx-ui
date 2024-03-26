@@ -59,8 +59,9 @@ let codePlaygroundUrl = ref("")
 const serialize = (data) => {
   const files = {
     'src/App.vue': data
-  };
-  return 'http://localhost:5175/#' + utoa(JSON.stringify(files));
+  }; // http://120.78.136.2/repl/
+  // return 'http://localhost:5175/#' + utoa(JSON.stringify(files));
+  return 'http://120.78.136.2/repl/#' + utoa(JSON.stringify(files));
 };
 
 const sourceCode = ref("");
