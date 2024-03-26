@@ -24,4 +24,8 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    rollupOptions: {
+      external: ['fx-ui-vue']    }
+  }
 });
