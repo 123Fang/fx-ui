@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 dist
 fx-ui-vue-dist
+fx-ui-vue-dist-2023
 dist-ssr
 *.local
 
