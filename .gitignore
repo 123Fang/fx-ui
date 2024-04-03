@@ -13,6 +13,7 @@ fx-ui-vue-dist
 fx-ui-vue-dist-2023
 dist-ssr
 *.local
+deploy
 
 # for test
 test
