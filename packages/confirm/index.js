@@ -1,9 +1,13 @@
 import { createVNode, render } from 'vue'
 //
 import mConfirm from './index.vue'
+
 const divNode = createVNode('div', { class: 'fx-confirm-container' })
-render(divNode, typeof document !== 'undefined'?document.body:'')
+
+render(divNode, typeof document !== 'undefined' ? document.body : '')
+
 const container = divNode.el
+
 const Confirm = ({ title, text,icon,confirmText,cancelText,confirmShow,cancelShow,closeShow,customClass }) => {
   if(typeof document !== 'undefined'){
     document.body.style="overflow:hidden"
