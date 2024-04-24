@@ -8,10 +8,13 @@ render(divNode, typeof document !== 'undefined' ? document.body : '')
 
 const container = divNode.el
 
-const Confirm = ({ title, text,icon,confirmText,cancelText,confirmShow,cancelShow,closeShow,customClass }) => {
-  if(typeof document !== 'undefined'){
+const Confirm = ({ title, text, icon, confirmText, cancelText, confirmShow, cancelShow, closeShow, customClass }) => {
+  
+  if (typeof document !== 'undefined') {
+    
     document.body.style="overflow:hidden"
   }
+  
   return new Promise((resolve, reject) => {
     const confirmCallback = () => {
       resolve()
