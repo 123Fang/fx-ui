@@ -1,13 +1,19 @@
 <template>
   <div :class="['fx-tree-item-box']">
     <li>
-      <div :class="['fx-tree-lable-box', { 'label-active': tabIndexs === items.key, 'fx-tree-lable-disabled': items.disabled }]"
+      <div
+        :class="['fx-tree-lable-box', { 'label-active': tabIndexs === items.key, 'fx-tree-lable-disabled': items.disabled }]"
         @click.stop.prevent="toggle(items)" :data-key="dataKey" :style="{ 'padding-left': index * 15 + 'px' }">
-        <span :class="[{ rotate: icon != 'fx-icon-arrow-right-filling' ? false : items.isOpen }, 'fx-tree-lable-span']"><i
-            :class="[{ 'fx-icon-arrow-right-filling': items.children && items.children.length }]"></i></span>
+
+        <span :class="[{ rotate: icon != 'fx-icon-arrow-right-filling' ? false : items.isOpen }, 'fx-tree-lable-span']">
+          <i :class="[{ 'fx-icon-arrow-right-filling': items.children && items.children.length }]"></i>
+        </span>
+
         <span
           :class="['fx-tree-label-select-span', { 'fx-tree-label-select-span-active': items.isSelected, 'fx-tree-label-select-span-active-1': items.semiSelected }]"
-          @click.stop="selectClick(items, index)" v-if="multiple"></span>
+          @click.stop="selectClick(items, index)" v-if="multiple">
+        </span>
+
         <span class="fx-tree-label">{{ items.label }}</span>
       </div>
       <transition name="slide-fade">
@@ -15,7 +21,8 @@
           <fx-tree-item v-for="(v, i) in items.children" :key="i" :items="v" :data-key="dataKey + '-' + i"
             :defaultOpenNodes="defaultOpenNodes" :icon="icon" @nodeClick="outClick($event, items)" :options="options"
             :index="index + 1" :tabIndexs="tabIndexs" @selectClick="emit('selectClick', $event)" :multiple="multiple"
-            :defaultSelectNodes="defaultSelectNodes"></fx-tree-item>
+            :defaultSelectNodes="defaultSelectNodes">
+          </fx-tree-item>
         </div>
       </transition>
     </li>
