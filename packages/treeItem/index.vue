@@ -17,6 +17,7 @@
         </span>
 
         <span class="fx-tree-label">{{ items.label }}</span>
+
       </div>
       <transition name="slide-fade">
         <div class="fx-tree-ul-box" v-show="items.isOpen" v-if="items.children && items.children.length">
@@ -88,10 +89,12 @@ var recursiveFunction = function (items) {
   return str.split(';')
 
 }
+
 const isFolder = computed(() => {
   // return props.children.items && props.items.children.length;
   return props.items.children.length;
 })
+
 const toggle = (item) => {
   if (!item.disabled) {
     if (isFolder.value && item.children && item.children.length) {
@@ -108,10 +111,12 @@ const toggle = (item) => {
     emit('change', item.key)
   }
 }
+
 const outClick = (item, e) => {
   emit('nodeClick', item)
   emit('change', item.key)
 }
+
 const getParents = (option, key) => {
   for (var i in option) {
     if (option[i].key == key) {
@@ -125,6 +130,7 @@ const getParents = (option, key) => {
     }
   }
 }
+
 const setSelectted = (item, flag) => {
   item.forEach((v, i) => {
     v.isSelected = flag
@@ -133,6 +139,7 @@ const setSelectted = (item, flag) => {
     }
   })
 }
+
 let n = 0
 const isParentSel = (item) => {
   item.forEach((v, i) => {
@@ -147,11 +154,13 @@ const isParentSel = (item) => {
 }
 const getSameLevelChile = (item, item1) => {
   let n1 = 0;
+
   item.children.forEach((v, i) => {
     if (v.isSelected) {
       n1 += 1
     }
   })
+
   isParentSel(item1.children, item1)
 
   if (n1 == item.children.length) {
@@ -164,6 +173,8 @@ const getSameLevelChile = (item, item1) => {
   } else {
     item.semiSelected = true
   }
+
+
   if (selectedLen.value == n) {
     item1.isSelected = true
     item1.semiSelected = false
@@ -176,6 +187,7 @@ const getSameLevelChile = (item, item1) => {
   }
   // getIsSelectNode(props.options)
 }
+
 const getIsSelectNode = (option) => {
   option.forEach((v, i) => {
     if (v.isSelected) {
@@ -187,12 +199,15 @@ const getIsSelectNode = (option) => {
   })
   return selectList.value
 }
+
 const selectClick = (item, index) => {
   if (!item.disabled) {
     item.isSelected = !item.isSelected
     item.semiSelected = false
     selectList.value = []
     let nodeItems = getParents(props.options, item.key)
+
+    console.log('nodeItems', nodeItems)
     if (item.isSelected) {
       if (item.children) {
         setSelectted(item.children, true)
@@ -261,17 +276,13 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.slide-fade-enter-from,
+.slide-fade-enter-from ,
 .slide-fade-leave-to {
   transition: all .3s ease;
   height: 0px;
 }
-.slide-fade-enter-active {
-  height: v-bind(height);
-  transition: all .3s ease;
-}
-
-.slide-fade-leave-active {
+.slide-fade-enter-to,
+.slide-fade-leave-to {
   transition: all .3s ease;
   height: v-bind(height);
 }
@@ -358,7 +369,7 @@ onMounted(() => {
         }
       }
 
-      .fx-tree-label-select-span-active {
+      .fx-tree-label-select-span-active { // ☑️
         border: 1px solid #0e80eb;
         background: #0e80eb;
 
@@ -367,7 +378,7 @@ onMounted(() => {
         }
       }
 
-      .fx-tree-label-select-span-active-1 {
+      .fx-tree-label-select-span-active-1 { // 目录 - 
         width: 14px;
         height: 14px;
         border-radius: 2px;

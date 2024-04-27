@@ -3,7 +3,7 @@
   <fx-tree
     :options="treeOptions"
     multiple
-    :defaultSelectNodes="['0-1', '0-2-1-0']"
+    :defaultSelectNodes="[]"
   ></fx-tree>
 </template>
 
