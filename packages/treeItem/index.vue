@@ -21,10 +21,18 @@
       </div>
       <transition name="slide-fade">
         <div class="fx-tree-ul-box" v-show="items.isOpen" v-if="items.children && items.children.length">
-          <fx-tree-item v-for="(v, i) in items.children" :key="i" :items="v" :data-key="dataKey + '-' + i"
-            :defaultOpenNodes="defaultOpenNodes" :icon="icon" @nodeClick="outClick($event, items)" :options="options"
-            :index="index + 1" :tabIndexs="tabIndexs" @selectClick="emit('selectClick', $event)" :multiple="multiple"
-            :defaultSelectNodes="defaultSelectNodes">
+          <fx-tree-item 
+            v-for="(v, i) in items.children" :key="i" :items="v" :data-key="dataKey + '-' + i"
+            :defaultOpenNodes="defaultOpenNodes" 
+            :defaultSelectNodes="defaultSelectNodes"
+            :icon="icon" 
+            :options="options"
+            :index="index + 1" 
+            :tabIndexs="tabIndexs" 
+            :multiple="multiple"
+            @nodeClick="outClick($event, items)" 
+            @selectClick="emit('selectClick', $event)" 
+          >
           </fx-tree-item>
         </div>
       </transition>
@@ -153,6 +161,7 @@ const isParentSel = (item) => {
   })
 }
 const getSameLevelChile = (item, item1) => {
+  console.log('----------------', item)
   let n1 = 0;
 
   item.children.forEach((v, i) => {
@@ -161,7 +170,7 @@ const getSameLevelChile = (item, item1) => {
     }
   })
 
-  isParentSel(item1.children, item1)
+  isParentSel(item.children)
 
   if (n1 == item.children.length) {
     selectedLen.value + 1
@@ -171,19 +180,20 @@ const getSameLevelChile = (item, item1) => {
     item.isSelected = false
     item.semiSelected = false
   } else {
+    console.log('99999')
     item.semiSelected = true
   }
 
 
   if (selectedLen.value == n) {
-    item1.isSelected = true
-    item1.semiSelected = false
+    item.isSelected = true
+    item.semiSelected = false
   } else if (selectedLen.value == 0) {
-    item1.isSelected = false
-    item1.semiSelected = false
+    item.isSelected = false
+    item.semiSelected = false
   } else {
-    item1.isSelected = false
-    item1.semiSelected = true
+    item.isSelected = false
+    item.semiSelected = true
   }
   // getIsSelectNode(props.options)
 }
@@ -214,7 +224,11 @@ const selectClick = (item, index) => {
       }
       if (nodeItems.length > 1) {
         n = selectedLen.value = 0
-        getSameLevelChile(nodeItems[1], nodeItems[nodeItems.length - 1])
+        nodeItems.forEach((val, index) => {
+          if (index === 0) return
+          getSameLevelChile(val)
+        })
+        // getSameLevelChile(nodeItems[1], nodeItems[nodeItems.length - 1])
       }
     } else {
       if (item.children) {
@@ -222,7 +236,11 @@ const selectClick = (item, index) => {
       }
       if (nodeItems.length > 1) {
         n = selectedLen.value = 0
-        getSameLevelChile(nodeItems[1], nodeItems[nodeItems.length - 1])
+        nodeItems.forEach((val, index) => {
+          if (index === 0) return
+          getSameLevelChile(val)
+        })
+        // getSameLevelChile(nodeItems[1], nodeItems[nodeItems.length - 1])
       }
     }
     emit('selectClick', item)
