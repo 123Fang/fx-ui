@@ -148,7 +148,6 @@ const setSelectted = (item, flag) => {
       v.isSelected = flag
       v.isSelected = false
     }
-    
     if (v.children) {
       setSelectted(v.children, flag)
     }
@@ -249,8 +248,8 @@ const selectClick = (item, index) => {
         })
       }
     }
-    // emit('selectClick', item)
-    // emit('nodeClick', getIsSelectNode(props.options))
+    emit('selectClick', item)
+    emit('nodeClick', getIsSelectNode(props.options))
   }
 }
 const setSelect = (option, key) => {
