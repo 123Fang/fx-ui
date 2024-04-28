@@ -1,0 +1,15 @@
+{
+  "name": "fx-ui-vue",
+  "private": false,
+  "version": "0.7.1",
+  "type": "module",
+  "module": "./dist/fx-ui-vue.js",
+  "exports": {
+    ".": {
+      "import": "./dist/fx-ui-vue.js",
+      "require": "./dist/fx-ui-vue.umd.js"
+    },
+    "./*": "./*"
+  },
+  "homepage": "http://120.78.136.2/fxui"
+}

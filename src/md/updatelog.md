@@ -1,5 +1,9 @@
 ## fx-ui-vue 更新日志
 
+### 0.7.2
+
+- 修复 fx-tree 组件 bug
+
 ### 0.7.1
 
 - 修复 fx-row 组件 bug

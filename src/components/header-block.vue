@@ -2,7 +2,7 @@
   <div class="header-block-box">
     <div class="logoBox">
       <img src="../assets/logo.jpeg" alt="fx-ui" @click="toHome" />
-      <fx-badge type="primary" value="V 0.7.0">
+      <fx-badge type="primary" value="V 0.7.2">
         <a href="javascript:;" @click="toHome">FX-UI-VUE</a>
       </fx-badge>
     </div>
