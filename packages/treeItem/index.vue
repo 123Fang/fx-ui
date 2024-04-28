@@ -141,7 +141,14 @@ const getParents = (option, key) => {
 
 const setSelectted = (item, flag) => {
   item.forEach((v, i) => {
-    v.isSelected = flag
+    if (flag) {
+      v.isSelected = flag
+      v.semiSelected = false
+    } else {
+      v.isSelected = flag
+      v.isSelected = false
+    }
+    
     if (v.children) {
       setSelectted(v.children, flag)
     }
@@ -160,10 +167,9 @@ const isParentSel = (item) => {
     }
   })
 }
-const getSameLevelChile = (item, item1) => {
+const getSameLevelChile = (item) => {
   console.log('----------------', item)
   let n1 = 0;
-
   item.children.forEach((v, i) => {
     if (v.isSelected) {
       n1 += 1
@@ -172,26 +178,25 @@ const getSameLevelChile = (item, item1) => {
 
   isParentSel(item.children)
 
-  if (n1 == item.children.length) {
-    selectedLen.value + 1
+  if (n1 == item.children.length) { // 子节点都选中
+    // selectedLen.value + 1
     item.isSelected = true
     item.semiSelected = false
-  } else if (n1 == 0) {
+  } else if (n1 == 0) { //  // 子节点都没选中
     item.isSelected = false
     item.semiSelected = false
   } else {
-    console.log('99999')
     item.semiSelected = true
   }
 
 
-  if (selectedLen.value == n) {
+  if (selectedLen.value == n) { // 所有子孙都选中
     item.isSelected = true
     item.semiSelected = false
-  } else if (selectedLen.value == 0) {
+  } else if (selectedLen.value == 0) { // 所有子孙没有任何一个选中
     item.isSelected = false
     item.semiSelected = false
-  } else {
+  } else { // 有选中的，但是所有子孙没有全部选中
     item.isSelected = false
     item.semiSelected = true
   }
@@ -215,36 +220,37 @@ const selectClick = (item, index) => {
     item.isSelected = !item.isSelected
     item.semiSelected = false
     selectList.value = []
-    let nodeItems = getParents(props.options, item.key)
+    let parents = getParents(props.options, item.key)
+    console.log('parents--parents',parents)
 
-    console.log('nodeItems', nodeItems)
-    if (item.isSelected) {
+    if (item.isSelected) { // 选中
       if (item.children) {
-        setSelectted(item.children, true)
+        setSelectted(item.children, true) // 把它后子孙所有节点都设置为选中
       }
-      if (nodeItems.length > 1) {
+      // 处理这个节点的所有父级目录的选中状态
+      if (parents.length > 1) {
+        console.log('问题')
         n = selectedLen.value = 0
-        nodeItems.forEach((val, index) => {
+        parents.forEach((val, index) => {
           if (index === 0) return
           getSameLevelChile(val)
         })
-        // getSameLevelChile(nodeItems[1], nodeItems[nodeItems.length - 1])
       }
-    } else {
+    } else { // 取消选中
       if (item.children) {
-        setSelectted(item.children, false)
+        setSelectted(item.children, false) // 把它后子孙所有节点都设置为取消选中
       }
-      if (nodeItems.length > 1) {
+      // 处理这个节点的所有父级目录的选中状态
+      if (parents.length > 1) {
         n = selectedLen.value = 0
-        nodeItems.forEach((val, index) => {
+        parents.forEach((val, index) => {
           if (index === 0) return
           getSameLevelChile(val)
         })
-        // getSameLevelChile(nodeItems[1], nodeItems[nodeItems.length - 1])
       }
     }
-    emit('selectClick', item)
-    emit('nodeClick', getIsSelectNode(props.options))
+    // emit('selectClick', item)
+    // emit('nodeClick', getIsSelectNode(props.options))
   }
 }
 const setSelect = (option, key) => {
