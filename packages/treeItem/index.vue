@@ -167,7 +167,6 @@ const isParentSel = (item) => {
   })
 }
 const getSameLevelChile = (item) => {
-  console.log('----------------', item)
   let n1 = 0;
   item.children.forEach((v, i) => {
     if (v.isSelected) {
@@ -187,7 +186,6 @@ const getSameLevelChile = (item) => {
   } else {
     item.semiSelected = true
   }
-
 
   if (selectedLen.value == n) { // 所有子孙都选中
     item.isSelected = true
