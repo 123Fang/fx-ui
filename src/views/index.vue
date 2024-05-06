@@ -1,7 +1,7 @@
 <template>
   <div class="contentBox">
     <div class="imgLogo">
-      <img src="../assets/logo.jpeg" alt="fx-ui" />
+      <img src="../assets/logo.jpeg" alt="fx-ui-vue" />
     </div>
     <h3>一套适合开发者使用的轻量级UI组件库，完美支持vue3</h3>
     <div class="tiBox">
@@ -87,6 +87,7 @@ const { devoteList } = state;
 sessionStorage.setItem("mIndex", "0-0");
 sessionStorage.setItem("tabIndex", 0);
 </script>
+
 <style lang="scss" scoped>
 .contentBox {
   width: 100%;

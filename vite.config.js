@@ -13,7 +13,7 @@ const dirname = path.dirname(filename);
 export default defineConfig({
   plugins: [
     Vue({
-      include: [/\.vue$/, /\.md$/], // <--
+      include: [/\.vue$/, /\.md$/],
     }),
     Markdown(),
     vueJsx() // 针对测试用例中jsx的编译
